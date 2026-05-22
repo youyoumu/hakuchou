@@ -14,7 +14,7 @@ __pycache__
 .env
 
 
-/packages/note/.apkg/*
+/packages/note/.artifacts/*
 /packages/note/.kanjivg/*
 /packages/note/.anki-build/*
 

@@ -23,6 +23,7 @@ export const paths = {
   "@/tools/":                                  p("tools/"),
   "@/template/":                               p("template/"),
   "@/.anki-build/":                            p(".anki-build/"),
+  "@/.artifacts/":                             p(".artifacts/"),
 
   "@/src/index.tsx":                           p("src/index.tsx"),
 

@@ -11,7 +11,8 @@
     "generate-template": "vite-node ./script/generate-template.ts",
     "copy-anki-build": "vite-node ./script/copy-anki-build.ts",
     "update-note-type": "vite-node ./script/update-note-type.ts",
-    "apply": "FAST_BUILD=true vite build && vite-node ./script/generate-template.ts && vite-node ./script/copy-anki-build.ts && vite-node ./script/update-note-type.ts"
+    "apply": "FAST_BUILD=true vite build && vite-node ./script/generate-template.ts && vite-node ./script/copy-anki-build.ts && vite-node ./script/update-note-type.ts",
+    "generate-apkg": "vite-node ./script/generate-apkg.ts"
   },
   "dependencies": {
     "solid-js": "^1.9.13"
