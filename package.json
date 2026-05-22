@@ -1,0 +1,22 @@
+{
+  "name": "hakuchou",
+  "description": "",
+  "keywords": [],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --env-mode=loose",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "biome format .",
+    "format:write": "biome format --write .",
+    "lint": "oxlint .",
+    "lint:write": "oxlint --fix ."
+  },
+  "packageManager": "pnpm@10.33.2",
+  "devDependencies": {
+    "oxfmt": "^0.51.0",
+    "oxlint": "^1.66.0",
+    "turbo": "^2.9.14",
+    "typescript": "^6.0.3"
+  }
+}
