@@ -8,7 +8,8 @@
     "build:fast": "FAST_BUILD=true vite build",
     "typecheck": "tsc -b",
     "test": "vitest run",
-    "generate-template": "vite-node ./script/generate-template.ts"
+    "generate-template": "vite-node ./script/generate-template.ts",
+    "copy-anki-build": "vite-node ./script/copy-anki-build.ts"
   },
   "dependencies": {
     "solid-js": "^1.9.13"

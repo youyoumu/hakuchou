@@ -30,6 +30,9 @@ export const paths = {
   "@/template/back.html":                      p("template/back.html"),
   "@/template/style.css":                      p("template/style.css"),
 
+  "@/dist/_hakuchou.js":                       p("dist/_hakuchou.js"),
+  "@/dist/_hakuchou_libs.js":                  p("dist/_hakuchou_libs.js"),
+  "@/dist/_hakuchou.css":                      p("dist/_hakuchou.css"),
 
   "@/.anki-build/_hakuchou_front.html":        p(".anki-build/_hakuchou_front.html"),
   "@/.anki-build/_hakuchou_back.html":         p(".anki-build/_hakuchou_back.html"),
