@@ -1,4 +1,5 @@
 export type AnkiFields = {
+  QuestionType: string;
   Expression: string;
   ExpressionReading: string;
   ExpressionAudio: string;
@@ -36,6 +37,7 @@ export type AnkiBackFields = AnkiFields;
 
 // prettier-ignore
 export const ankiFieldsSkeleton: AnkiFields = {
+  QuestionType: "",
   Expression: "",
   ExpressionReading: "",
   ExpressionAudio: "",

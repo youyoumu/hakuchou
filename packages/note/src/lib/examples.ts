@@ -2,6 +2,7 @@ import type { AnkiFields } from "./types";
 
 // prettier-ignore
 const exampleFields1: AnkiFields = {
+  "QuestionType": "kakitori",
   "Expression": "拘る",
   "ExpressionReading": "かかわる",
   "ExpressionAudio": "<a class=\"replay-button soundLink\" href=\"#\" onclick=\"pycmd('play:a:0'); return false;\" draggable=\"false\">\n    <svg class=\"playImage\" viewBox=\"0 0 64 64\" version=\"1.1\">\n        <circle cx=\"32\" cy=\"32\" r=\"29\"></circle>\n        <path d=\"M56.502,32.301l-37.502,20.101l0.329,-40.804l37.173,20.703Z\"></path>\n    </svg>\n</a>",

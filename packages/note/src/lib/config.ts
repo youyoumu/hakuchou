@@ -34,6 +34,8 @@ export function updateConfigState(
   updateDocument: boolean,
 ) {
   const _dataset = getRootDatasetConfig(config);
+  //TODO: configurable?
+  el.dataset.theme = "dark";
 
   const cssVar = getCssVar(config);
   Object.entries(cssVar).forEach(([key, value]) => {
