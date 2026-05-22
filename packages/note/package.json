@@ -9,7 +9,8 @@
     "typecheck": "tsc -b",
     "test": "vitest run",
     "generate-template": "vite-node ./script/generate-template.ts",
-    "copy-anki-build": "vite-node ./script/copy-anki-build.ts"
+    "copy-anki-build": "vite-node ./script/copy-anki-build.ts",
+    "update-note-type": "vite-node ./script/update-note-type.ts"
   },
   "dependencies": {
     "solid-js": "^1.9.13"
