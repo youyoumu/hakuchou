@@ -5,10 +5,10 @@
     "correctness": "error"
   },
   "rules": {
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "typescript/no-explicit-any": "warn"
   },
   "env": {
     "builtin": true
   }
 }
-
