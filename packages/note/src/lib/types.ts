@@ -20,6 +20,7 @@ export type AnkiFields = {
 
 const frontKeys = [
   "Expression",
+  "ExpressionReading",
   "Sentence",
   "SentenceAudio",
   "ExpressionAudio",
