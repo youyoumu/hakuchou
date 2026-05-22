@@ -13,6 +13,11 @@ apps/docs/.vitepress/cache
 __pycache__
 .env
 
+
+/packages/note/.apkg/*
+/packages/note/.kanjivg/*
+/packages/note/.anki-build/*
+
 .lazy.lua
 .TODO.md
 AGENTS.md

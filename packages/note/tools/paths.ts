@@ -21,7 +21,20 @@ export const paths = {
   "@/preprocess/":                             p("preprocess/"),
   "@/script/":                                 p("script/"),
   "@/tools/":                                  p("tools/"),
+  "@/template/":                               p("template/"),
   "@/.anki-build/":                            p(".anki-build/"),
 
   "@/src/index.tsx":                           p("src/index.tsx"),
+
+  "@/template/front.html":                     p("template/front.html"),
+  "@/template/back.html":                      p("template/back.html"),
+  "@/template/style.css":                      p("template/style.css"),
+
+
+  "@/.anki-build/_hakuchou_front.html":        p(".anki-build/_hakuchou_front.html"),
+  "@/.anki-build/_hakuchou_back.html":         p(".anki-build/_hakuchou_back.html"),
+  "@/.anki-build/_hakuchou_style.css":         p(".anki-build/_hakuchou_style.css"),
+  "@/.anki-build/_hakuchou.css":               p(".anki-build/_hakuchou.css"),
+  "@/.anki-build/_hakuchou.js":                p(".anki-build/_hakuchou.js"),
+  "@/.anki-build/_hakuchou_libs.js":           p(".anki-build/_hakuchou_libs.js"),
 } as const;

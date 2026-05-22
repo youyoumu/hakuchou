@@ -164,6 +164,7 @@ export async function initAnki({ side, ssr }: { side: "front" | "back"; ssr?: bo
       shadow.prepend(mainCss);
     }
 
+    //TODO: remove plugin
     const pluginCss = document.createElement("link");
     pluginCss.rel = "stylesheet";
     pluginCss.href = "./_hakuchou_plugin.css";

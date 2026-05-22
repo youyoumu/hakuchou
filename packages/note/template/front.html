@@ -1,0 +1,51 @@
+<!-- Hakuchou Note __VERSION__ -->
+
+<!-- prettier-ignore -->
+<div
+  id="hakuchou-root"
+  data-side="front"
+>
+</div>
+
+<!-- prettier-ignore -->
+<div>
+  <link rel="stylesheet" href="_hakuchou.css" id="hakuchou-css">
+  <link href="_hakuchou.js" data-anki-include>
+  <link href="_hakuchou_libs.js" data-anki-include>
+</div>
+
+<!-- prettier-ignore -->
+<div style="display: none" id="anki-fields">
+  <!-- Expression 1 Fields -->
+  <div data-field="Expression">{{Expression}}</div>
+  <div data-field="ExpressionReading">{{ExpressionReading}}</div>
+  {{#Kakitori}}
+  <div data-field="ExpressionAudio"></div>
+  {{/Kakitori}}
+  {{^Kakitori}}
+  <div data-field="ExpressionAudio"></div>
+  {{/Kakitori}}
+  <div data-field="UserNotes">{{UserNotes}}</div>
+  <div data-field="Glossary">{{Glossary}}</div>
+  <div data-field="Sentence">{{Sentence}}</div>
+  <div data-field="Picture">{{Picture}}</div>
+  <div data-field="PitchPosition">{{PitchPosition}}</div>
+  <div data-field="PitchCategories">{{PitchCategories}}</div>
+  <div data-field="Frequency">{{Frequency}}</div>
+  <div data-field="FreqSort">{{FreqSort}}</div>
+
+  <!-- Category & Extra Fields -->
+  <div data-field="Kakitori">{{Kakitori}}</div>
+  <div data-field="KotowazaYojijukugo">{{KotowazaYojijukugo}}</div>
+  <div data-field="TaigigoRuigigo">{{TaigigoRuigigo}}</div>
+  <div data-field="Tags">{{Tags}}</div>
+</div>
+
+<script type="module">
+  import { initAnki } from "./_kiku.js";
+
+  initAnki({
+    side: "front",
+    ssr: false,
+  });
+</script>
