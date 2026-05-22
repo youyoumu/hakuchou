@@ -1,32 +1,46 @@
 export type AnkiFields = {
-  QuestionType: string;
   Expression: string;
   ExpressionReading: string;
   ExpressionAudio: string;
-  SelectionText: string;
-  MainDefinition: string;
-  DefinitionPicture: string;
-  Sentence: string;
-  SentenceAudio: string;
-  Picture: string;
+  UserNotes: string;
   Glossary: string;
+  Sentence: string;
+  Picture: string;
   PitchPosition: string;
   PitchCategories: string;
   Frequency: string;
   FreqSort: string;
+
+  Expression2: string;
+  ExpressionReading2: string;
+  ExpressionAudio2: string;
+  UserNotes2: string;
+  Glossary2: string;
+  Sentence2: string;
+  Picture2: string;
+  PitchPosition2: string;
+  PitchCategories2: string;
+  Frequency2: string;
+  FreqSort2: string;
+
+  Kakitori: string;
+  KotowazaYojijukugo: string;
+  TaigigoRuigigo: string;
+
   Tags: string;
-  CardID: string;
 };
 
 const frontKeys = [
   "Expression",
   "ExpressionReading",
-  "Sentence",
-  "SentenceAudio",
   "ExpressionAudio",
-  "Picture",
+  "Sentence",
+
+  "Kakitori",
+  "KotowazaYojijukugo",
+  "TaigigoRuigigo",
+
   "Tags",
-  "CardID",
 ] satisfies readonly (keyof AnkiFields)[];
 
 type ExtractUsedFields<T, U extends readonly (keyof T)[]> = Pick<T, U[number]>;
@@ -38,23 +52,35 @@ export type AnkiBackFields = AnkiFields;
 
 // prettier-ignore
 export const ankiFieldsSkeleton: AnkiFields = {
-  QuestionType: "",
   Expression: "",
   ExpressionReading: "",
   ExpressionAudio: "",
-  SelectionText: "",
-  MainDefinition: "",
-  DefinitionPicture: "",
-  Sentence: "",
-  SentenceAudio: "",
-  Picture: "",
+  UserNotes: "",
   Glossary: "",
+  Sentence: "",
+  Picture: "",
   PitchPosition: "",
   PitchCategories: "",
   Frequency: "",
   FreqSort: "",
-  Tags: "",
-  CardID: "",
+
+  Expression2: "",
+  ExpressionReading2: "",
+  ExpressionAudio2: "",
+  UserNotes2: "",
+  Glossary2: "",
+  Sentence2: "",
+  Picture2: "",
+  PitchPosition2: "",
+  PitchCategories2: "",
+  Frequency2: "",
+  FreqSort2: "",
+
+  Kakitori: "",
+  KotowazaYojijukugo: "",
+  TaigigoRuigigo: "",
+
+  Tags: ""
 };
 
 export type PitchType = "heiban" | "atamadaka" | "nakadaka" | "odaka" | "kifuku";
