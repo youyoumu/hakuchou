@@ -1,5 +1,4 @@
 /* @refresh reload */
-import { createSignal } from "solid-js";
 import { createStore } from "solid-js/store";
 import { hydrate, render } from "solid-js/web";
 import {
@@ -18,6 +17,15 @@ import {
 import { constant } from "./lib/constant";
 import { exampleFields } from "./lib/examples";
 import "./styles/main.css";
+import { BreakpointContextProvider } from "./contexts/BreakpointContext";
+import { CacheContextProvider } from "./contexts/CacheContext";
+import { GeneralContextProvider } from "./contexts/GeneralContext";
+import { ConfigContextProvider } from "./contexts/ConfigContext";
+import { AnkiFieldContextProvider } from "./contexts/AnkiFieldsContext";
+import { CardStoreContextProvider } from "./contexts/CardContext";
+import { Layout } from "./components/Layout";
+import { Front } from "./components/Front";
+import { Back } from "./components/Back";
 
 export async function init({
   root,
@@ -31,7 +39,6 @@ export async function init({
   assetsPath = window.location.origin,
   isAnkiWeb = false,
   isAnkiDesktop = typeof pycmd !== "undefined",
-  workerPath,
   rootDataset,
 }: {
   root: HTMLElement;
@@ -45,22 +52,39 @@ export async function init({
   assetsPath?: string;
   isAnkiWeb?: boolean;
   isAnkiDesktop?: boolean;
-  workerPath?: string;
   rootDataset?: RootDataset;
 }) {
-  const [$startupTime, $setStartupTime] = createSignal(0);
-  const now = performance.now();
-
   root.part.add("root-part");
 
   config = typeof config === "function" ? config(defaultConfig) : config;
   updateConfigState(root, config, !isAnkiWeb);
   const [$config, $setConfig] = createStore(config);
 
-  const App = () => null;
+  const App = () => (
+    <BreakpointContextProvider>
+      <CacheContextProvider cacheStore={cacheStore}>
+        <GeneralContextProvider
+          aborter={aborter}
+          isAnkiWeb={isAnkiWeb}
+          isAnkiDesktop={isAnkiDesktop}
+          templateDataset={rootDataset ?? {}}
+          ankiDroidAPI={ankiDroidAPI}
+          assetsPath={assetsPath}
+          root={root}
+        >
+          <ConfigContextProvider value={{ $config, $setConfig }}>
+            <AnkiFieldContextProvider initialAnkiFields={ankiFields}>
+              <CardStoreContextProvider side={side}>
+                <Layout>{side === "front" ? <Front /> : <Back />}</Layout>
+              </CardStoreContextProvider>
+            </AnkiFieldContextProvider>
+          </ConfigContextProvider>
+        </GeneralContextProvider>
+      </CacheContextProvider>
+    </BreakpointContextProvider>
+  );
 
   const dispose = ssr ? hydrate(App, root) : render(App, root);
-  $setStartupTime(performance.now() - now);
   return { dispose };
 }
 
