@@ -22,8 +22,8 @@ function colorizeKanjivg(svg: SVGSVGElement) {
   if (total > 0) {
     strokePaths.forEach((path, index) => {
       const progress = total === 1 ? 1 : index / (total - 1);
-      const hue = 220 - progress * 160;
-      const lightness = 38 + progress * 18;
+      const hue = 0 + progress * 220;
+      const lightness = 48 + progress * 8;
       path.setAttribute("stroke", `hsl(${hue} 84% ${lightness}%)`);
     });
   }
@@ -35,8 +35,8 @@ function colorizeKanjivg(svg: SVGSVGElement) {
   if (strokeNumbers.length > 0) {
     strokeNumbers.forEach((text, index) => {
       const progress = strokeNumbers.length === 1 ? 1 : index / (strokeNumbers.length - 1);
-      const hue = 220 - progress * 160;
-      const lightness = 32 + progress * 20;
+      const hue = 0 + progress * 220;
+      const lightness = 42 + progress * 10;
       text.setAttribute("fill", `hsl(${hue} 84% ${lightness}%)`);
       text.setAttribute("font-weight", "700");
       text.style.pointerEvents = "none";
