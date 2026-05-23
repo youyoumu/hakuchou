@@ -8,11 +8,13 @@ type CardStore = {
 };
 
 type CardType = "kakitori" | "kotowaza-yojijukugo" | "taigigo-ruigigo";
+type RelationType = "tai" | "rui" | "unknown";
 
 type CardContextValue = {
   $card: Store<CardStore>;
   $setCard: SetStoreFunction<CardStore>;
   $cardType: Accessor<CardType>;
+  $relationType: Accessor<RelationType>;
 };
 
 const CardStoreContext = createContext<CardContextValue>();
@@ -31,8 +33,22 @@ export function CardStoreContextProvider(props: { children: JSX.Element; side: "
     return "kakitori";
   });
 
+  const $relationType = createMemo<RelationType>(() => {
+    if (
+      $ankiFields.TaigigoRuigigo.includes("対") ||
+      $ankiFields.TaigigoRuigigo.toLowerCase().includes("tai")
+    )
+      return "tai";
+    if (
+      $ankiFields.TaigigoRuigigo.includes("類") ||
+      $ankiFields.TaigigoRuigigo.toLowerCase().includes("rui")
+    )
+      return "rui";
+    return "unknown";
+  });
+
   return (
-    <CardStoreContext.Provider value={{ $card, $setCard, $cardType }}>
+    <CardStoreContext.Provider value={{ $card, $setCard, $cardType, $relationType }}>
       {props.children}
     </CardStoreContext.Provider>
   );
