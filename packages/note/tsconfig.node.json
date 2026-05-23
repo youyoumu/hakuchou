@@ -29,5 +29,5 @@
       "#/*": ["./src/*"]
     }
   },
-  "include": ["vite.config.ts", "preview/anki/vite.config.ts", "tools", "script"]
+  "include": ["vite.config.ts", "preview/anki/vite.config.ts", "tools", "script", "preprocess"]
 }

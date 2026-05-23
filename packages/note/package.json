@@ -11,6 +11,7 @@
     "generate-template": "vite-node ./script/generate-template.ts",
     "copy-anki-build": "vite-node ./script/copy-anki-build.ts",
     "update-note-type": "vite-node ./script/update-note-type.ts",
+    "process-kanjivg": "node --experimental-strip-types ./preprocess/process-kanjivg.ts",
     "apply": "FAST_BUILD=true vite build && vite-node ./script/generate-template.ts && vite-node ./script/copy-anki-build.ts && vite-node ./script/update-note-type.ts",
     "generate-apkg": "vite-node ./script/generate-apkg.ts"
   },

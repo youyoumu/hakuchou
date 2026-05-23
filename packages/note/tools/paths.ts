@@ -24,6 +24,7 @@ export const paths = {
   "@/template/":                               p("template/"),
   "@/.anki-build/":                            p(".anki-build/"),
   "@/.artifacts/":                             p(".artifacts/"),
+  "@/.collection.media/":                      p(".collection.media/"),
 
   "@/src/index.tsx":                           p("src/index.tsx"),
 

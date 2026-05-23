@@ -17,6 +17,7 @@ __pycache__
 /packages/note/.artifacts/*
 /packages/note/.kanjivg/*
 /packages/note/.anki-build/*
+/packages/note/.collection.media/*
 
 .lazy.lua
 .TODO.md
