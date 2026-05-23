@@ -1,13 +1,15 @@
 import { createMemo, createSignal, type Accessor } from "solid-js";
 
 export function useSentences(
-  html: Accessor<string>,
+  $html: Accessor<string>,
   opts?: {
     initialIndex?: (length: number) => number;
   },
 ) {
   const $sentences = createMemo(() => {
-    return html()
+    const html = $html();
+    if (!html) return [];
+    return $html()
       .split("|")
       .map((s, i) => ({ page: i + 1, html: s }));
   });
