@@ -4,10 +4,12 @@ import circularDpendency from "vite-plugin-circular-dependency";
 import solid from "vite-plugin-solid";
 import { paths } from "./tools/paths.js";
 import { getVersion } from "./tools/util.js";
+import { serveAnkiCollectionMedia } from "./tools/vite-plugin-serve-anki-collection.media.js";
 
 const fastBuild = process.env.FAST_BUILD === "true";
 const plugins: PluginOption[] = [solid({ ssr: true }), tailwindcss()];
 if (!fastBuild) {
+  plugins.push(serveAnkiCollectionMedia());
   plugins.push(circularDpendency({ outputFilePath: "./.circularDependency.json" }));
 }
 
