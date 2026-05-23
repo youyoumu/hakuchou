@@ -15,9 +15,8 @@ export function Header() {
       <div class="w-full mx-auto px-2 sm:px-4 max-w-4xl">
         <div class="flex justify-between flex-row h-6 items-center min-h-6">
           <div class="flex gap-1 sm:gap-2 items-center">
-            <div class="relative">
-              <div class="text-base-content-soft">{constant.VERSION}</div>
-            </div>
+            <div class="text-base-content-soft">v{constant.VERSION}</div>
+            <div class="text-base-content-soft text-xs">({constant.COMMIT_SHA.slice(0, 7)})</div>
           </div>
         </div>
       </div>
