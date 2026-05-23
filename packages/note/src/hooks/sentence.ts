@@ -1,0 +1,24 @@
+import { createMemo, createSignal, type Accessor } from "solid-js";
+
+export const useSentences = (html: Accessor<string>) => {
+  const $sentences = createMemo(() => {
+    return html()
+      .split("|")
+      .map((s, i) => ({ page: i + 1, html: s }));
+  });
+
+  const [$index, $setIndex] = createSignal(0);
+  const $currentPage = createMemo(() => $sentences()[$index()]);
+
+  function changePage(direction: 1 | -1) {
+    if ($sentences().length === 0) return;
+    $setIndex((prev) => (prev + direction + $sentences().length) % $sentences().length);
+  }
+
+  return {
+    $sentences,
+    $index,
+    $currentPage,
+    changePage,
+  };
+};
