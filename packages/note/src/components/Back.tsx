@@ -3,6 +3,7 @@ import type { DatasetProp } from "#/lib/config";
 import { isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
 import { createMemo, createSignal, For } from "solid-js";
 import { unwrap } from "solid-js/store";
+import Sentence from "./Sentence";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -117,6 +118,10 @@ export function Back() {
           <div class="flex justify-end py-2 gap-2">{/* <ExternalLinks /> */}</div>
         </div>
       )}
+
+      <div class="flex flex-col justify-center gap-2 items-center text-center">
+        <Sentence />
+      </div>
 
       <dialog class="modal" ref={$setModalRef}>
         <div class="modal-box max-w-sm max-h-[80svh] flex flex-col p-4 gap-2">

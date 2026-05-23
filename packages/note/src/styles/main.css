@@ -11,6 +11,14 @@
   writing-mode: horizontal-tb;
 }
 
+@layer utilities {
+  .sentence-field {
+    b {
+      color: var(--pitch-color, var(--color-base-content-primary));
+    }
+  }
+}
+
 :root {
   font-size: 16px;
   scrollbar-gutter: stable;
