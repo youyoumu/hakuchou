@@ -36,11 +36,15 @@ export function CardStoreContextProvider(props: { children: JSX.Element; side: "
   const $relationType = createMemo<RelationType>(() => {
     if (
       $ankiFields.TaigigoRuigigo.includes("対") ||
+      $ankiFields.TaigigoRuigigo.includes("たい") ||
+      $ankiFields.TaigigoRuigigo.includes("タイ") ||
       $ankiFields.TaigigoRuigigo.toLowerCase().includes("tai")
     )
       return "tai";
     if (
       $ankiFields.TaigigoRuigigo.includes("類") ||
+      $ankiFields.TaigigoRuigigo.includes("るい") ||
+      $ankiFields.TaigigoRuigigo.includes("ルイ") ||
       $ankiFields.TaigigoRuigigo.toLowerCase().includes("rui")
     )
       return "rui";

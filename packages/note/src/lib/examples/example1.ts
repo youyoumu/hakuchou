@@ -26,7 +26,7 @@ export const exampleFields: AnkiFields = {
   "FreqSort2": "23818",
   "Kakitori": "",
   "KotowazaYojijukugo": "",
-  "TaigigoRuigigo": "x",
+  "TaigigoRuigigo": "対",
   "Tags": ""
 }
 
