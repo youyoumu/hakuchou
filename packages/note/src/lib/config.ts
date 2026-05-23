@@ -45,3 +45,11 @@ export function updateConfigState(
     el.style.setProperty(key, value);
   });
 }
+
+// prettier-ignore
+export type Dataset = {
+  "data-theme": string;
+  "data-dictionary": string
+};
+
+export type DatasetProp = Partial<Dataset>;

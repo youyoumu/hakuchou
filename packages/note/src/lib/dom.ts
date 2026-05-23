@@ -1,3 +1,25 @@
 export function parseToDoc(html: string) {
   return new DOMParser().parseFromString(html, "text/html");
 }
+
+export function isHtmlEffectivelyEmpty(html: string): boolean {
+  if (!html || html.trim() === "") return true;
+  const doc = new DOMParser().parseFromString(html, "text/html");
+
+  // Remove elements that never count as content
+  doc.querySelectorAll("script, style, template").forEach((el) => {
+    el.remove();
+  });
+
+  // Check for meaningful text
+  const text = doc.body.textContent
+    ?.replace(/\u00a0/g, "") // nbsp
+    .trim();
+
+  if (text && text.length > 0) return false;
+
+  // Check for meaningful non-text content
+  const meaningfulSelectors = ["img", "video", "audio", "svg", "iframe", "canvas"];
+
+  return !meaningfulSelectors.some((sel) => doc.body.querySelector(sel));
+}
