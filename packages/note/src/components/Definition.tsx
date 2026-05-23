@@ -100,7 +100,7 @@ export function Definition(props: { type: 1 | 2 }) {
 
     if (userNotes) {
       p.push({
-        name: "Selection Text",
+        name: "User Notes",
         html: $shouldCensor()
           ? censorTermsInHtml(userNotes, [$expression(), $expressionReading()])
           : userNotes,
