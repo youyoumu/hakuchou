@@ -1,4 +1,5 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
+import { useCardContext } from "#/contexts/CardContext";
 import { useSentences } from "#/hooks/sentence";
 import { constant } from "#/lib/constant";
 import { parseToDoc } from "#/lib/dom";
@@ -8,6 +9,7 @@ import { unwrap } from "solid-js/store";
 
 export function Front() {
   const { $ankiFields } = useAnkiFieldContext<"front">();
+  const { $cardType } = useCardContext();
 
   const { $currentPage } = useSentences(() => $ankiFields.Sentence, {
     initialIndex: (length) => {
@@ -19,10 +21,12 @@ export function Front() {
 
   const $sentence = createMemo(() => {
     const doc = parseToDoc($currentPage().html);
-    const els = doc.querySelectorAll("b");
-    for (const el of els) {
-      el.innerHTML = hiraganaToKatakana($ankiFields.ExpressionReading);
-      el.classList.add("underline", "text-base-content-primary");
+    if ($cardType() === "kakitori") {
+      const els = doc.querySelectorAll("b");
+      for (const el of els) {
+        el.innerHTML = hiraganaToKatakana($ankiFields.ExpressionReading);
+        el.classList.add("underline", "text-base-content-primary");
+      }
     }
     return doc.body.innerHTML;
   });
