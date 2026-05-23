@@ -73,9 +73,11 @@ function censorTermsInHtml(html: string, terms: string[]) {
 
 export function Definition(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const { $cardType } = useCardContext();
+  const { $cardType, $card } = useCardContext();
   const $variant = createMemo(() => props.type);
-  const $isKotowazaYojijukugo = createMemo(() => $cardType() === "kotowaza-yojijukugo");
+  const $shouldCensor = createMemo(
+    () => $card.side === "front" && $cardType() === "kotowaza-yojijukugo",
+  );
   const $expression = createMemo(() =>
     $variant() === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
   );
@@ -99,7 +101,7 @@ export function Definition(props: { type: 1 | 2 }) {
     if (userNotes) {
       p.push({
         name: "Selection Text",
-        html: $isKotowazaYojijukugo()
+        html: $shouldCensor()
           ? censorTermsInHtml(userNotes, [$expression(), $expressionReading()])
           : userNotes,
       });
@@ -122,7 +124,7 @@ export function Definition(props: { type: 1 | 2 }) {
         for (const [name, html] of dictGroups) {
           p.push({
             name: name,
-            html: $isKotowazaYojijukugo()
+            html: $shouldCensor()
               ? censorTermsInHtml(
                   `<div style="text-align: left;" class="yomitan-glossary"><ol>${styles}${html}</ol></div>`,
                   [$expression(), $expressionReading()],
@@ -133,7 +135,7 @@ export function Definition(props: { type: 1 | 2 }) {
       } else {
         p.push({
           name: "Glossary",
-          html: $isKotowazaYojijukugo()
+          html: $shouldCensor()
             ? censorTermsInHtml(glossary, [$expression(), $expressionReading()])
             : glossary,
         });
@@ -205,7 +207,9 @@ export function Definition(props: { type: 1 | 2 }) {
             </div>
           )}
         </div>
-        <div class="flex justify-end py-2 gap-2">{/* <ExternalLinks /> */}</div>
+        {/* <div class="flex justify-end py-2 gap-2"> */}
+        {/*   <ExternalLinks /> */}
+        {/* </div> */}
       </div>
       <dialog class="modal" ref={$setModalRef}>
         <div class="modal-box max-w-sm max-h-[80svh] flex flex-col p-4 gap-2">
