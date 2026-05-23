@@ -2,6 +2,8 @@ import { parseToDoc } from "#/lib/dom";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js/types/server/reactive.js";
 
+const activeKanjivgTimers = new WeakMap<SVGSVGElement, number[]>();
+
 function extractUnicodePoints(expression: string) {
   const text = parseToDoc(expression).body.textContent?.replace(/\u00a0/g, "") ?? "";
 
@@ -45,9 +47,57 @@ function colorizeKanjivg(svg: SVGSVGElement) {
     group.style.pointerEvents = "none";
   });
 
-  svg.setAttribute("style", "width: 100%; height: auto; display: block;");
+  svg.setAttribute(
+    "style",
+    "width: 100%; height: auto; display: block; cursor: pointer; touch-action: manipulation;",
+  );
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
   return svg;
+}
+
+export function animateKanjivgStrokes(svg: SVGSVGElement) {
+  const strokePaths = Array.from(
+    svg.querySelectorAll<SVGPathElement>('g[id^="kvg:StrokePaths_"] path'),
+  );
+
+  if (strokePaths.length === 0) return;
+
+  const reducedMotionQuery = globalThis.matchMedia?.("(prefers-reduced-motion: reduce)");
+  const prefersReducedMotion = reducedMotionQuery?.matches ?? false;
+
+  const existingTimers = activeKanjivgTimers.get(svg);
+  if (existingTimers) {
+    existingTimers.forEach((timer) => globalThis.clearTimeout(timer));
+  }
+  activeKanjivgTimers.set(svg, []);
+
+  strokePaths.forEach((path) => {
+    const length = path.getTotalLength();
+
+    path.getAnimations().forEach((animation) => animation.cancel());
+    path.style.transition = "none";
+    path.style.strokeDasharray = `${length}`;
+    path.style.strokeDashoffset = `${length}`;
+
+    if (prefersReducedMotion) {
+      path.style.strokeDashoffset = "0";
+    }
+  });
+
+  if (prefersReducedMotion) return;
+
+  const duration = 300;
+
+  globalThis.requestAnimationFrame(() => {
+    strokePaths.forEach((path, index) => {
+      const timer = globalThis.setTimeout(() => {
+        path.style.transition = `stroke-dashoffset ${duration}ms ease-out`;
+        path.style.strokeDashoffset = "0";
+      }, index * duration);
+
+      activeKanjivgTimers.get(svg)?.push(timer);
+    });
+  });
 }
 
 async function loadKanjivg(unicode: string, signal?: AbortSignal) {

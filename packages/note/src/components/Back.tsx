@@ -4,7 +4,7 @@ import { isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
 import { createMemo, createSignal, For, onMount } from "solid-js";
 import { unwrap } from "solid-js/store";
 import Sentence from "./Sentence";
-import { useKanjivg } from "#/hooks/kanjivg";
+import { animateKanjivgStrokes, useKanjivg } from "#/hooks/kanjivg";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -56,6 +56,13 @@ export function Back() {
     $setDefinitionIndex((prev) => (prev + direction + $pages().length) % $pages().length);
   }
 
+  function handleKanjivgClick(event: MouseEvent) {
+    if (!(event.target instanceof Element)) return;
+    const svg = event.target.closest("svg");
+    if (!(svg instanceof SVGSVGElement)) return;
+    animateKanjivgStrokes(svg);
+  }
+
   const $definitionDataset = createMemo<DatasetProp>(() => ({
     "data-dictionary": $currentPage()?.name,
   }));
@@ -76,7 +83,10 @@ export function Back() {
           ></div>
         </div>
 
-        <div class="flex flex-col items-center justify-center gap-1 bg-base-200 p-4 rounded-lg w-40">
+        <div
+          class="flex flex-col items-center justify-center gap-1 bg-base-200 p-4 rounded-lg w-40"
+          on:click={handleKanjivgClick}
+        >
           {$svgs()}
         </div>
       </div>
