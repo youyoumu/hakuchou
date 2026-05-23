@@ -68,12 +68,15 @@ export function Back() {
 
   return (
     <>
-      <div class="flex flex-col gap-2 items-center justify-center max-h-[60vh]">
-        <div
-          class="text-7xl vertical-rl underline-offset-4 leading-12"
-          innerHTML={$ankiFields.Expression}
-        ></div>
-        <div class="flex flex-wrap items-center justify-center gap-2 max-w-full overflow-x-auto py-2">
+      <div class="flex justify-between gap-4">
+        <div class="flex flex-col gap-2 items-center justify-center flex-1 p-4 bg-base-200 rounded-lg">
+          <div
+            class="text-7xl vertical-rl underline-offset-4 leading-12 tracking-widest"
+            innerHTML={$ankiFields.Expression}
+          ></div>
+        </div>
+
+        <div class="flex flex-col items-center justify-center gap-1 bg-base-200 p-4 rounded-lg w-40">
           {$svgs()}
         </div>
       </div>
