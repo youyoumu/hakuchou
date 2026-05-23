@@ -1,7 +1,7 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import type { DatasetProp } from "#/lib/config";
 import { isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
-import { createMemo, createSignal, For } from "solid-js";
+import { createMemo, createSignal, For, onMount } from "solid-js";
 import { unwrap } from "solid-js/store";
 import Sentence from "./Sentence";
 
@@ -57,6 +57,12 @@ export function Back() {
   const $definitionDataset = createMemo<DatasetProp>(() => ({
     "data-dictionary": $currentPage()?.name,
   }));
+
+  onMount(() => {
+    if (globalThis.HAKUCHOU) {
+      globalThis.HAKUCHOU.ankiFields = unwrap($ankiFields);
+    }
+  });
 
   return (
     <>
@@ -156,10 +162,6 @@ export function Back() {
           <button on:touchend={(e) => e.stopPropagation()}>Close</button>
         </form>
       </dialog>
-
-      <pre class="text-xs bg-base-200 p-4 rounded-lg overflow-auto">
-        {JSON.stringify(unwrap($ankiFields), null, 2)}
-      </pre>
     </>
   );
 }

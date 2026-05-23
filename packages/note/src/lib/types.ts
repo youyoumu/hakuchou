@@ -172,6 +172,7 @@ declare global {
         dispose?: () => void;
         unload?: () => void;
         ankiDroidAPI?: AnkiDroidAPI;
+        ankiFields?: AnkiBackFields | AnkiFrontFields;
       } & CacheStore)
     | undefined;
 }

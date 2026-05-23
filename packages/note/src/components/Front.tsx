@@ -2,7 +2,7 @@ import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useSentences } from "#/hooks/sentence";
 import { constant } from "#/lib/constant";
 import { parseToDoc } from "#/lib/dom";
-import { createMemo } from "solid-js";
+import { createMemo, onMount } from "solid-js";
 import { unwrap } from "solid-js/store";
 
 export function Front() {
@@ -26,6 +26,12 @@ export function Front() {
     return doc.body.innerHTML;
   });
 
+  onMount(() => {
+    if (globalThis.HAKUCHOU) {
+      globalThis.HAKUCHOU.ankiFields = unwrap($ankiFields);
+    }
+  });
+
   return (
     <>
       <div class="flex flex-col justify-center items-center max-h-[60vh]">
@@ -34,9 +40,6 @@ export function Front() {
           innerHTML={$sentence()}
         ></div>
       </div>
-      <pre class="text-xs bg-base-200 p-4 rounded-lg overflow-auto">
-        {JSON.stringify(unwrap($ankiFields), null, 2)}
-      </pre>
     </>
   );
 }
