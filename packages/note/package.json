@@ -14,7 +14,7 @@
     "process-kanjivg": "node --experimental-strip-types ./preprocess/process-kanjivg.ts",
     "apply": "COMMIT_SHA=$(git rev-parse HEAD) vite build && vite-node ./script/generate-template.ts && vite-node ./script/copy-anki-build.ts && vite-node ./script/update-note-type.ts",
     "apply:fast": "FAST_BUILD=true vite build && vite-node ./script/generate-template.ts && vite-node ./script/copy-anki-build.ts && vite-node ./script/update-note-type.ts",
-    "generate-apkg": "vite-node ./script/generate-apkg.ts"
+    "generate-apkg": "pnpm run apply && vite-node ./script/generate-apkg.ts"
   },
   "dependencies": {
     "solid-js": "^1.9.13"
