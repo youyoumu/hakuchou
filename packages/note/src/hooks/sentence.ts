@@ -1,11 +1,11 @@
 import { createMemo, createSignal, type Accessor } from "solid-js";
 
-export const useSentences = (
+export function useSentences(
   html: Accessor<string>,
   opts?: {
     initialIndex?: (length: number) => number;
   },
-) => {
+) {
   const $sentences = createMemo(() => {
     return html()
       .split("|")
@@ -28,4 +28,4 @@ export const useSentences = (
     $currentPage,
     changePage,
   };
-};
+}
