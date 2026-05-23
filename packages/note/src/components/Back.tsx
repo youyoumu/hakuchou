@@ -119,9 +119,7 @@ export function Back() {
         </div>
       )}
 
-      <div class="flex flex-col justify-center gap-2 items-center text-center">
-        <Sentence />
-      </div>
+      <Sentence />
 
       <dialog class="modal" ref={$setModalRef}>
         <div class="modal-box max-w-sm max-h-[80svh] flex flex-col p-4 gap-2">
