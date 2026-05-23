@@ -1,13 +1,20 @@
 import { createMemo, createSignal, type Accessor } from "solid-js";
 
-export const useSentences = (html: Accessor<string>) => {
+export const useSentences = (
+  html: Accessor<string>,
+  opts?: {
+    initialIndex?: (length: number) => number;
+  },
+) => {
   const $sentences = createMemo(() => {
     return html()
       .split("|")
       .map((s, i) => ({ page: i + 1, html: s }));
   });
 
-  const [$index, $setIndex] = createSignal(0);
+  const [$index, $setIndex] = createSignal(
+    opts?.initialIndex ? opts.initialIndex($sentences().length) : 0,
+  );
   const $currentPage = createMemo(() => $sentences()[$index()]);
 
   function changePage(direction: 1 | -1) {

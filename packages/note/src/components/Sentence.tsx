@@ -1,9 +1,26 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useSentences } from "#/hooks/sentence";
+import { constant } from "#/lib/constant";
 
 export default function Sentence() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const { $sentences, $currentPage, $index, changePage } = useSentences(() => $ankiFields.Sentence);
+  const { $sentences, $currentPage, $index, changePage } = useSentences(
+    () => $ankiFields.Sentence,
+    {
+      initialIndex: (length) => {
+        let randomIndex: string | number | null = sessionStorage.getItem(
+          constant.key["hakuchou-sentence-index"],
+        );
+        if (randomIndex) {
+          randomIndex = parseInt(randomIndex);
+        }
+        if (typeof randomIndex === "number" && randomIndex >= 0 && length > randomIndex) {
+          return randomIndex;
+        }
+        return Math.floor(Math.random() * length);
+      },
+    },
+  );
 
   return (
     <div>

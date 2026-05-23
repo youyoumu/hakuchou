@@ -11,5 +11,6 @@ export const constant = {
   assets,
   key: {
     "hakuchou-config": "hakuchou-config",
+    "hakuchou-sentence-index": "hakuchou-sentence-index",
   },
 };

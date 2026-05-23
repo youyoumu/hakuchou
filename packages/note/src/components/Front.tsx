@@ -1,4 +1,6 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
+import { useSentences } from "#/hooks/sentence";
+import { constant } from "#/lib/constant";
 import { parseToDoc } from "#/lib/dom";
 import { createMemo } from "solid-js";
 import { unwrap } from "solid-js/store";
@@ -6,8 +8,16 @@ import { unwrap } from "solid-js/store";
 export function Front() {
   const { $ankiFields } = useAnkiFieldContext<"front">();
 
+  const { $currentPage } = useSentences(() => $ankiFields.Sentence, {
+    initialIndex: (length) => {
+      const randomIndex = Math.floor(Math.random() * length);
+      sessionStorage.setItem(constant.key["hakuchou-sentence-index"], randomIndex.toString());
+      return randomIndex;
+    },
+  });
+
   const $sentence = createMemo(() => {
-    const doc = parseToDoc($ankiFields.Sentence);
+    const doc = parseToDoc($currentPage().html);
     const els = doc.querySelectorAll("b");
     for (const el of els) {
       el.innerHTML = $ankiFields.ExpressionReading;
