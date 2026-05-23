@@ -4,8 +4,9 @@ import { useSentences } from "#/hooks/sentence";
 import { constant } from "#/lib/constant";
 import { parseToDoc } from "#/lib/dom";
 import { hiraganaToKatakana } from "#/lib/kana";
-import { createMemo, onMount } from "solid-js";
+import { createMemo, onMount, Show } from "solid-js";
 import { unwrap } from "solid-js/store";
+import { Definition } from "./Definition";
 
 export function Front() {
   const { $ankiFields } = useAnkiFieldContext<"front">();
@@ -39,12 +40,18 @@ export function Front() {
 
   return (
     <>
-      <div class="flex flex-col justify-center items-center max-h-[60vh] bg-base-200 p-4 rounded-lg">
-        <div
-          class="text-4xl vertical-rl underline-offset-4 leading-12 tracking-widest"
-          innerHTML={$sentence()}
-        ></div>
-      </div>
+      <Show when={$cardType() === "kakitori"}>
+        <div class="flex flex-col justify-center items-center max-h-[60vh] bg-base-200 p-4 rounded-lg">
+          <div
+            class="text-4xl vertical-rl underline-offset-4 leading-12 tracking-widest"
+            innerHTML={$sentence()}
+          ></div>
+        </div>
+      </Show>
+
+      <Show when={$cardType() === "kotowaza-yojijukugo"}>
+        <Definition />
+      </Show>
     </>
   );
 }
