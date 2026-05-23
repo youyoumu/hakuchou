@@ -7,6 +7,7 @@ import { hiraganaToKatakana } from "#/lib/kana";
 import { createMemo, onMount, Show } from "solid-js";
 import { unwrap } from "solid-js/store";
 import { Definition } from "./Definition";
+import { Expression } from "./Expression";
 
 export function Front() {
   const { $ankiFields } = useAnkiFieldContext<"front">();
@@ -52,7 +53,11 @@ export function Front() {
       </Show>
 
       <Show when={$cardType() === "kotowaza-yojijukugo"}>
-        <Definition />
+        <Definition type={1} />
+      </Show>
+
+      <Show when={$cardType() === "taigigo-ruigigo"}>
+        <Expression type={1} />
       </Show>
     </>
   );

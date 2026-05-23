@@ -2,7 +2,7 @@ import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useCardContext } from "#/contexts/CardContext";
 import type { DatasetProp } from "#/lib/config";
 import { isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
-import { createMemo, createSignal, For, Show } from "solid-js";
+import { createMemo, createSignal, For, Show, type Component } from "solid-js";
 
 function censorTermsInHtml(html: string, terms: string[]) {
   const normalizedTerms = terms.filter((term) => term.trim().length > 0);
@@ -71,21 +71,36 @@ function censorTermsInHtml(html: string, terms: string[]) {
   return doc.body.innerHTML;
 }
 
-export function Definition() {
+export function Definition(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
   const { $cardType } = useCardContext();
+  const $variant = createMemo(() => props.type);
   const $isKotowazaYojijukugo = createMemo(() => $cardType() === "kotowaza-yojijukugo");
+  const $expression = createMemo(() =>
+    $variant() === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
+  );
+  const $expressionReading = createMemo(() =>
+    $variant() === 1 ? $ankiFields.ExpressionReading : $ankiFields.ExpressionReading2,
+  );
+  const $userNotes = createMemo(() =>
+    $variant() === 1 ? $ankiFields.UserNotes : $ankiFields.UserNotes2,
+  );
+  const $glossary = createMemo(() =>
+    $variant() === 1 ? $ankiFields.Glossary : $ankiFields.Glossary2,
+  );
 
   const $pages = createMemo(() => {
     const p: { name: string; html: string }[] = [];
-    const userNotes = !isHtmlEffectivelyEmpty($ankiFields.UserNotes) ? $ankiFields.UserNotes : "";
-    const glossary = !isHtmlEffectivelyEmpty($ankiFields.Glossary) ? $ankiFields.Glossary : "";
+    const userNotesHtml = $userNotes();
+    const glossaryHtml = $glossary();
+    const userNotes = !isHtmlEffectivelyEmpty(userNotesHtml) ? userNotesHtml : "";
+    const glossary = !isHtmlEffectivelyEmpty(glossaryHtml) ? glossaryHtml : "";
 
     if (userNotes) {
       p.push({
         name: "Selection Text",
         html: $isKotowazaYojijukugo()
-          ? censorTermsInHtml(userNotes, [$ankiFields.Expression, $ankiFields.ExpressionReading])
+          ? censorTermsInHtml(userNotes, [$expression(), $expressionReading()])
           : userNotes,
       });
     }
@@ -110,7 +125,7 @@ export function Definition() {
             html: $isKotowazaYojijukugo()
               ? censorTermsInHtml(
                   `<div style="text-align: left;" class="yomitan-glossary"><ol>${styles}${html}</ol></div>`,
-                  [$ankiFields.Expression, $ankiFields.ExpressionReading],
+                  [$expression(), $expressionReading()],
                 )
               : `<div style="text-align: left;" class="yomitan-glossary"><ol>${styles}${html}</ol></div>`,
           });
@@ -119,7 +134,7 @@ export function Definition() {
         p.push({
           name: "Glossary",
           html: $isKotowazaYojijukugo()
-            ? censorTermsInHtml(glossary, [$ankiFields.Expression, $ankiFields.ExpressionReading])
+            ? censorTermsInHtml(glossary, [$expression(), $expressionReading()])
             : glossary,
         });
       }

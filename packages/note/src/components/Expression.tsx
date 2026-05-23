@@ -1,9 +1,13 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useKanjivg, animateKanjivgStrokes } from "#/hooks/kanjivg";
+import { createMemo } from "solid-js";
 
-export function Expression() {
+export function Expression(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const { $svgs } = useKanjivg(() => $ankiFields.Expression);
+  const $expression = createMemo(() =>
+    props.type === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
+  );
+  const { $svgs } = useKanjivg(() => $expression());
 
   function handleKanjivgClick(event: MouseEvent) {
     if (!(event.target instanceof Element)) return;
@@ -16,7 +20,7 @@ export function Expression() {
       <div class="flex flex-col gap-2 items-center justify-center flex-1 p-4 bg-base-200 rounded-lg">
         <div
           class="text-7xl vertical-rl underline-offset-4 leading-12 tracking-widest"
-          innerHTML={$ankiFields.Expression}
+          innerHTML={$expression()}
         ></div>
       </div>
 

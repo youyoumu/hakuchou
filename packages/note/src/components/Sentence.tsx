@@ -1,27 +1,27 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useSentences } from "#/hooks/sentence";
 import { constant } from "#/lib/constant";
-import { Show } from "solid-js";
+import { createMemo, Show } from "solid-js";
 
-export default function Sentence() {
+export function Sentence(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const { $sentences, $currentPage, $index, changePage } = useSentences(
-    () => $ankiFields.Sentence,
-    {
-      initialIndex: (length) => {
-        let randomIndex: string | number | null = sessionStorage.getItem(
-          constant.key["hakuchou-sentence-index"],
-        );
-        if (randomIndex) {
-          randomIndex = parseInt(randomIndex);
-        }
-        if (typeof randomIndex === "number" && randomIndex >= 0 && length > randomIndex) {
-          return randomIndex;
-        }
-        return Math.floor(Math.random() * length);
-      },
-    },
+  const $sentence = createMemo(() =>
+    props.type === 1 ? $ankiFields.Sentence : $ankiFields.Sentence2,
   );
+  const { $sentences, $currentPage, $index, changePage } = useSentences(() => $sentence(), {
+    initialIndex: (length) => {
+      let randomIndex: string | number | null = sessionStorage.getItem(
+        constant.key["hakuchou-sentence-index"],
+      );
+      if (randomIndex) {
+        randomIndex = parseInt(randomIndex);
+      }
+      if (typeof randomIndex === "number" && randomIndex >= 0 && length > randomIndex) {
+        return randomIndex;
+      }
+      return Math.floor(Math.random() * length);
+    },
+  });
 
   return (
     <Show when={$sentences().length > 0}>
