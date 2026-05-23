@@ -17,7 +17,9 @@ export function useSentences(
   const [$index, $setIndex] = createSignal(
     opts?.initialIndex ? opts.initialIndex($sentences().length) : 0,
   );
-  const $currentPage = createMemo(() => $sentences()[$index()]);
+  const $currentPage = createMemo<{ page: number; html: string } | undefined>(
+    () => $sentences()[$index()],
+  );
 
   function changePage(direction: 1 | -1) {
     if ($sentences().length === 0) return;

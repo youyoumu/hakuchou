@@ -21,7 +21,9 @@ export function Front() {
   });
 
   const $sentence = createMemo(() => {
-    const doc = parseToDoc($currentPage().html);
+    const currentPage = $currentPage();
+    if (!currentPage) return "";
+    const doc = parseToDoc(currentPage.html);
     if ($cardType() === "kakitori") {
       const els = doc.querySelectorAll("b");
       for (const el of els) {
