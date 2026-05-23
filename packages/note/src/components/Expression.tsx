@@ -29,13 +29,21 @@ export function Expression(props: { type: 1 | 2 }) {
         }}
       >
         <div
-          class="text-7xl vertical-rl underline-offset-4 leading-12 tracking-widest"
+          class="vertical-rl underline-offset-4 leading-12 tracking-widest"
+          classList={{
+            "text-7xl": $expression().length < 7,
+            "text-5xl": $expression().length >= 7,
+          }}
           innerHTML={$expression()}
         ></div>
       </div>
 
       <div
-        class="flex flex-col items-center justify-center gap-1 bg-base-200 p-4 rounded-lg w-40"
+        class="flex flex-col items-center justify-center gap-1 bg-base-200 p-4 rounded-lg"
+        classList={{
+          "w-40": $expression().length < 7,
+          "w-24": $expression().length >= 7,
+        }}
         on:click={handleKanjivgClick}
       >
         {$svgs()}
