@@ -23,10 +23,11 @@ export function CardStoreContextProvider(props: { children: JSX.Element; side: "
     side: props.side,
   });
 
-  const $cardType = createMemo(() => {
+  const $cardType = createMemo<CardType>(() => {
     if ($ankiFields.Kakitori) return "kakitori";
     if ($ankiFields.KotowazaYojijukugo) return "kotowaza-yojijukugo";
     if ($ankiFields.TaigigoRuigigo) return "taigigo-ruigigo";
+    if (!$ankiFields.Sentence) return "kotowaza-yojijukugo";
     return "kakitori";
   });
 
