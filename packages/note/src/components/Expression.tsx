@@ -5,7 +5,7 @@ import { createMemo } from "solid-js";
 
 export function Expression(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const { $cardType, $relationType } = useCardContext();
+  const { $cardType, $relationType, $card } = useCardContext();
   const $expression = createMemo(() =>
     props.type === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
   );
@@ -26,27 +26,27 @@ export function Expression(props: { type: 1 | 2 }) {
           "border-s-4": $cardType() === "taigigo-ruigigo",
           "border-success": $relationType() === "rui",
           "border-error": $relationType() === "tai",
+          hidden: $card.side === "back",
         }}
       >
         <div
-          class="vertical-rl underline-offset-4 leading-12 tracking-widest"
-          classList={{
-            "text-7xl": $expression().length < 7,
-            "text-5xl": $expression().length >= 7,
-          }}
+          class="vertical-rl underline-offset-4 leading-22 tracking-[0.2em] text-7xl"
           innerHTML={$expression()}
         ></div>
       </div>
 
       <div
-        class="flex flex-col items-center justify-center gap-1 bg-base-200 p-4 rounded-lg"
+        class="flex-1 bg-base-200 p-4 rounded-lg justify-center flex"
         classList={{
-          "w-40": $expression().length < 7,
-          "w-24": $expression().length >= 7,
+          "border-s-4": $cardType() === "taigigo-ruigigo",
+          "border-success": $relationType() === "rui",
+          "border-error": $relationType() === "tai",
+          hidden: $card.side === "front",
         }}
-        on:click={handleKanjivgClick}
       >
-        {$svgs()}
+        <div class="flex flex-col items-center justify-center w-24" on:click={handleKanjivgClick}>
+          {$svgs()}
+        </div>
       </div>
     </div>
   );

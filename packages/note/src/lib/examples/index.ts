@@ -1,1 +1,1 @@
-export { default as exampleFields } from "./example2";
+export { default as exampleFields } from "./example1";
