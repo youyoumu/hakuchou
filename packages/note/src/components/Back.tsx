@@ -6,6 +6,7 @@ import { Definition } from "./Definition";
 import { Expression } from "./Expression";
 import { useCardContext } from "#/contexts/CardContext";
 import { VerticalSentence } from "./VerticalSentence";
+import Frequency from "./Frequency";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -19,18 +20,23 @@ export function Back() {
 
   return (
     <>
-      <div class="flex flex-row-reverse gap-4">
-        <div class="flex flex-col">
-          <div class="min-h-lh text-sm mb-1 text-base-content-soft">{$ankiFields.Expression}</div>
-          <Show when={$cardType() !== "kakitori"}>
-            <Expression type={1} />
-          </Show>
-          <Show when={$cardType() === "kakitori"}>
-            <VerticalSentence />
-          </Show>
+      <div class="flex flex-col gap-2">
+        <div class="flex justify-end">
+          <Frequency />
         </div>
-        <div class="flex-1">
-          <Definition type={1} />
+        <div class="flex flex-row-reverse gap-4">
+          <div class="flex flex-col">
+            <div class="min-h-lh text-sm mb-1 text-base-content-soft">{$ankiFields.Expression}</div>
+            <Show when={$cardType() !== "kakitori"}>
+              <Expression type={1} />
+            </Show>
+            <Show when={$cardType() === "kakitori"}>
+              <VerticalSentence />
+            </Show>
+          </div>
+          <div class="flex-1">
+            <Definition type={1} />
+          </div>
         </div>
       </div>
       <Show when={$cardType() !== "kakitori"}>
@@ -49,15 +55,20 @@ export function Back() {
           {$relationText()}
         </div>
 
-        <div class="flex flex-row-reverse gap-4">
-          <div class="flex flex-col">
-            <div class="min-h-lh text-sm mb-1 text-base-content-soft">
-              {$ankiFields.Expression2}
-            </div>
-            <Expression type={2} />
+        <div class="flex flex-col gap-2">
+          <div class="flex justify-end">
+            <Frequency />
           </div>
-          <div class="flex-1">
-            <Definition type={2} />
+          <div class="flex flex-row-reverse gap-4">
+            <div class="flex flex-col">
+              <div class="min-h-lh text-sm mb-1 text-base-content-soft">
+                {$ankiFields.Expression2}
+              </div>
+              <Expression type={2} />
+            </div>
+            <div class="flex-1">
+              <Definition type={2} />
+            </div>
           </div>
         </div>
         <Sentence type={2} />

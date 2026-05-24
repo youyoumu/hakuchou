@@ -18,23 +18,26 @@ export function Front() {
 
   return (
     <>
-      <Show when={$cardType() === "kakitori"}>
-        <div class="flex flex-col items-end">
-          <div class="min-h-lh text-sm mb-1"></div>
-          <VerticalSentence />
-        </div>
-      </Show>
+      <div class="flex flex-col gap-2">
+        <div class="flex justify-end text-base min-h-lh"></div>
+        <Show when={$cardType() === "kakitori"}>
+          <div class="flex flex-col items-end">
+            <div class="min-h-lh text-sm mb-1"></div>
+            <VerticalSentence />
+          </div>
+        </Show>
 
-      <Show when={$cardType() === "kotowaza-yojijukugo"}>
-        <Definition type={1} />
-      </Show>
+        <Show when={$cardType() === "kotowaza-yojijukugo"}>
+          <Definition type={1} />
+        </Show>
 
-      <Show when={$cardType() === "taigigo-ruigigo"}>
-        <div>
-          <div class="min-h-lh text-sm mb-1"></div>
-          <Expression type={1} />
-        </div>
-      </Show>
+        <Show when={$cardType() === "taigigo-ruigigo"}>
+          <div>
+            <div class="min-h-lh text-sm mb-1"></div>
+            <Expression type={1} />
+          </div>
+        </Show>
+      </div>
     </>
   );
 }
