@@ -30,4 +30,3 @@ export const exampleFields: AnkiFields = {
     "Tags": ""
 }
 
-export default exampleFields;

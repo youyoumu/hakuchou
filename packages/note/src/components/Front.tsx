@@ -44,7 +44,7 @@ export function Front() {
   return (
     <>
       <Show when={$cardType() === "kakitori"}>
-        <div class="flex flex-col justify-center items-center max-h-[60vh] bg-base-200 p-4 rounded-lg">
+        <div class="flex flex-col justify-center items-end max-h-[60vh] bg-base-200 p-4 rounded-lg">
           <div
             class="text-4xl vertical-rl underline-offset-4 leading-12 tracking-widest"
             innerHTML={$sentence()}
