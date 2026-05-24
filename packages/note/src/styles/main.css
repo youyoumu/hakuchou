@@ -17,6 +17,24 @@
       color: var(--pitch-color, var(--color-base-content-primary));
     }
   }
+
+  [data-censor-term-group] {
+    display: inline-flex;
+    gap: 0.1em;
+    vertical-align: baseline;
+    user-select: none;
+  }
+
+  [data-censor-term-char] {
+    display: inline-block;
+    background: var(--color-neutral);
+    color: var(--color-neutral);
+    line-height: 1;
+    border-radius: 0.2em;
+    padding: 0;
+    min-width: 0.6em;
+    text-align: center;
+  }
 }
 
 :root {

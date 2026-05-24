@@ -61,17 +61,11 @@ export function censorTermsInHtml(html: string, terms: string[]) {
       }
 
       const redactionGroup = doc.createElement("span");
-      redactionGroup.setAttribute(
-        "style",
-        "display:inline-flex;gap:0.1em;vertical-align:baseline;user-select:none;",
-      );
+      redactionGroup.setAttribute("data-censor-term-group", "");
 
       for (const char of term) {
         const redaction = doc.createElement("span");
-        redaction.setAttribute(
-          "style",
-          "display:inline-block;background:var(--color-neutral);color:var(--color-neutral);line-height:1;border-radius:0.2em;padding:0 0em;min-width:0.6em;text-align:center;",
-        );
+        redaction.setAttribute("data-censor-term-char", "");
         redaction.textContent = char;
         redactionGroup.append(redaction);
       }
