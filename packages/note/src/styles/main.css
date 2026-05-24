@@ -20,19 +20,18 @@
 
   [data-censor-term-group] {
     display: inline-flex;
-    gap: 0.1em;
+    gap: 1px;
     vertical-align: baseline;
     user-select: none;
   }
 
   [data-censor-term-char] {
     display: inline-block;
-    background: var(--color-neutral);
-    color: var(--color-neutral);
+    background: var(--color-base-300);
+    color: var(--color-base-300);
     line-height: 1;
-    border-radius: 0.2em;
+    border-radius: 0.1em;
     padding: 0;
-    min-width: 0.6em;
     text-align: center;
   }
 }
