@@ -1,5 +1,6 @@
 import { useGeneralContext } from "#/contexts/GeneralContext";
 import { constant } from "#/lib/constant";
+import Frequency from "./Frequency";
 
 export function Header() {
   const { $general } = useGeneralContext();
@@ -17,6 +18,9 @@ export function Header() {
           <div class="flex gap-1 sm:gap-2 items-center">
             <div class="text-base-content-soft">v{constant.VERSION}</div>
             <div class="text-base-content-soft text-xs">({constant.COMMIT_SHA.slice(0, 7)})</div>
+          </div>
+          <div>
+            <Frequency />
           </div>
         </div>
       </div>
