@@ -5,6 +5,7 @@ import { Sentence } from "./Sentence";
 import { Definition } from "./Definition";
 import { Expression } from "./Expression";
 import { useCardContext } from "#/contexts/CardContext";
+import { VerticalSentence } from "./VerticalSentence";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -21,13 +22,20 @@ export function Back() {
       <div class="flex flex-row-reverse gap-4">
         <div class="flex flex-col">
           <div class="min-h-lh text-sm mb-1"></div>
-          <Expression type={1} />
+          <Show when={$cardType() !== "kakitori"}>
+            <Expression type={1} />
+          </Show>
+          <Show when={$cardType() === "kakitori"}>
+            <VerticalSentence />
+          </Show>
         </div>
         <div class="flex-1">
           <Definition type={1} />
         </div>
       </div>
-      <Sentence type={1} />
+      <Show when={$cardType() !== "kakitori"}>
+        <Sentence type={1} />
+      </Show>
       <Show when={$cardType() === "taigigo-ruigigo"}>
         <div
           class="divider text-4xl"
