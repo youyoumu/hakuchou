@@ -67,12 +67,8 @@ export function inflateKanjiData(data: MinimizedKanjiData): KanjiObject {
     joyo: data[10] === 1,
     kyoiku: data[11] === 1,
     kokuji: data[12] === 1,
-    kyujitai: data[13]
-      ? { type: data[13][0] as "TRUE" | "IS", value: data[13][1] }
-      : null,
-    itaiji: data[14]
-      ? { type: data[14][0] as "TRUE" | "IS", value: data[14][1] }
-      : null,
+    kyujitai: data[13] ? { type: data[13][0] as "TRUE" | "IS", value: data[13][1] } : null,
+    itaiji: data[14] ? { type: data[14][0] as "TRUE" | "IS", value: data[14][1] } : null,
     meaning: data[15].map(([meaning, supplementary]) => ({
       meaning,
       supplementary: supplementary.map(([tag, content]) => ({ tag, content })),
@@ -196,16 +192,16 @@ export function KanjiData(props: KanjiDataProps) {
   function MetadataSection() {
     return (
       <div class="metadata-section">
-        <Show
-          when={k().strokeImage}
-          fallback={
-            <div class="stroke-image">
-              <div class="empty-img flex border border-base-content-subtle-100">{k().kanji}</div>
-            </div>
-          }
-        >
-          {(strokeImage) => <div class="stroke-image" innerHTML={strokeImage()} />}
-        </Show>
+        {/* <Show */}
+        {/*   when={k().strokeImage} */}
+        {/*   fallback={ */}
+        {/*     <div class="stroke-image"> */}
+        {/*       <div class="empty-img flex border border-base-content-subtle-100">{k().kanji}</div> */}
+        {/*     </div> */}
+        {/*   } */}
+        {/* > */}
+        {/*   {(strokeImage) => <div class="stroke-image" innerHTML={strokeImage()} />} */}
+        {/* </Show> */}
         <div class="flex flex-col gap-2 items-start">
           <ReadingsSection />
           <div class="flex flex-row gap-1 items-start">
@@ -277,7 +273,9 @@ export function KanjiData(props: KanjiDataProps) {
                         meaningSupplementaryTagBg[supplementary.tag] ?? ""
                       }`}
                     >
-                      <div class={`badge-origin ${meaningSupplementaryTagBadge[supplementary.tag] ?? ""}`}>
+                      <div
+                        class={`badge-origin ${meaningSupplementaryTagBadge[supplementary.tag] ?? ""}`}
+                      >
                         {supplementary.tag}
                       </div>
                       <span class="text-base">{supplementary.content}</span>
@@ -382,23 +380,18 @@ export function KanjiData(props: KanjiDataProps) {
   }
 
   return (
-    <div class="collapse collapse-arrow rounded-none">
-      <input type="checkbox" class="p-0" checked />
-      <div class="collapse-content p-0">
-        <Show when={k()}>
-          <div class="kiku-plugin-kanji-data">
-            <div class="extra-info-container">
-              <MetadataSection />
-              <MeaningsSection />
-              <NaritachiSection />
-              <div class="bottom-sections">
-                <KadokawaSection />
-                <BigKanjiSection />
-              </div>
-            </div>
+    <Show when={k()}>
+      <div class="kiku-plugin-kanji-data">
+        <div class="extra-info-container">
+          <MetadataSection />
+          <MeaningsSection />
+          <NaritachiSection />
+          <div class="bottom-sections">
+            <KadokawaSection />
+            <BigKanjiSection />
           </div>
-        </Show>
+        </div>
       </div>
-    </div>
+    </Show>
   );
 }
