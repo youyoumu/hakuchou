@@ -22,7 +22,7 @@ export function Back() {
     <>
       <div class="flex flex-col gap-2">
         <div class="flex justify-end">
-          <Frequency />
+          <Frequency type={1} />
         </div>
         <div class="flex flex-row-reverse gap-4">
           <div class="flex flex-col">
@@ -57,7 +57,7 @@ export function Back() {
 
         <div class="flex flex-col gap-2">
           <div class="flex justify-end">
-            <Frequency />
+            <Frequency type={2} />
           </div>
           <div class="flex flex-row-reverse gap-4">
             <div class="flex flex-col">

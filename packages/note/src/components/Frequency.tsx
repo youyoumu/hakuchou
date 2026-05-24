@@ -2,10 +2,12 @@ import { createMemo } from "solid-js";
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { CircleChevronDownIcon } from "./Icons";
 
-export default function Frequency() {
+export default function Frequency(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const $freqSort = createMemo(() => $ankiFields.FreqSort);
-  const $frequency = createMemo(() => $ankiFields.Frequency);
+  const $freqSort = createMemo(() => (props.type === 1 ? $ankiFields.FreqSort : $ankiFields.FreqSort2));
+  const $frequency = createMemo(
+    () => (props.type === 1 ? $ankiFields.Frequency : $ankiFields.Frequency2),
+  );
 
   return (
     <div class="flex gap-1 items-center animate-fade-in-sm relative hover:[&_#frequency]:block z-20">
