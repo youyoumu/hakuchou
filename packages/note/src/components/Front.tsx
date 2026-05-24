@@ -57,7 +57,10 @@ export function Front() {
       </Show>
 
       <Show when={$cardType() === "taigigo-ruigigo"}>
-        <Expression type={1} />
+        <div>
+          <div class="min-h-lh text-sm mb-1"></div>
+          <Expression type={1} />
+        </div>
       </Show>
     </>
   );

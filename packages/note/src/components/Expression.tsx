@@ -20,7 +20,9 @@ export function Expression(props: { type: 1 | 2 }) {
 
   function RelationIndicator() {
     return (
-      <Show when={$relationType() === "rui" || $relationType() === "tai"}>
+      <Show
+        when={$card.side === "front" && ($relationType() === "rui" || $relationType() === "tai")}
+      >
         <div
           class="absolute top-4 left-4 flex justify-center items-center"
           classList={{
@@ -35,36 +37,31 @@ export function Expression(props: { type: 1 | 2 }) {
   }
 
   return (
-    <div class="flex justify-between gap-4">
+    <div
+      class="flex gap-4 flex-1 p-4 bg-base-200 rounded-lg relative justify-center"
+      classList={{
+        "border-s-4": $cardType() === "taigigo-ruigigo",
+        "border-success": $relationType() === "rui",
+        "border-error": $relationType() === "tai",
+      }}
+    >
+      <RelationIndicator />
       <div
-        class="flex flex-col gap-2 items-center justify-center flex-1 p-4 bg-base-200 rounded-lg relative"
+        class="vertical-rl underline-offset-4 leading-22 tracking-[0.2em] text-7xl py-2"
         classList={{
-          "border-s-4": $cardType() === "taigigo-ruigigo",
-          "border-success": $relationType() === "rui",
-          "border-error": $relationType() === "tai",
           hidden: $card.side === "back",
         }}
-      >
-        <RelationIndicator />
-        <div
-          class="vertical-rl underline-offset-4 leading-22 tracking-[0.2em] text-7xl"
-          innerHTML={$expression()}
-        ></div>
-      </div>
+        innerHTML={$expression()}
+      ></div>
 
       <div
-        class="flex-1 bg-base-200 p-4 rounded-lg justify-center flex relative"
+        class="flex flex-col justify-start w-24"
+        on:click={handleKanjivgClick}
         classList={{
-          "border-s-4": $cardType() === "taigigo-ruigigo",
-          "border-success": $relationType() === "rui",
-          "border-error": $relationType() === "tai",
           hidden: $card.side === "front",
         }}
       >
-        <RelationIndicator />
-        <div class="flex flex-col items-center justify-center w-24" on:click={handleKanjivgClick}>
-          {$svgs()}
-        </div>
+        {$svgs()}
       </div>
     </div>
   );

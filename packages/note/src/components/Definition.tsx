@@ -88,7 +88,7 @@ export function Definition(props: { type: 1 | 2 }) {
 
   return (
     <Show when={$pages().length > 0}>
-      <div {...$definitionDataset()}>
+      <div class="flex flex-col h-full" {...$definitionDataset()}>
         <Show when={$pages().length > 1}>
           <div
             class="flex justify-between text-base-content-calm text-sm cursor-pointer hover:text-base-content transition-colors mb-1 tappable"
@@ -106,7 +106,7 @@ export function Definition(props: { type: 1 | 2 }) {
           </div>
         </Show>
         <div
-          class="relative bg-base-200 p-4 border-s-4 text-base sm:text-xl rounded-lg definition-field"
+          class="relative bg-base-200 p-4 border-s-4 text-base sm:text-xl rounded-lg definition-field flex-1"
           style={{
             "border-color": "var(--dictionary-color, var(--color-primary)",
           }}
