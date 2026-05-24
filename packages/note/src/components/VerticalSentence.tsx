@@ -59,21 +59,19 @@ export function VerticalSentence() {
         }
       } else {
         const svgs = $svgs();
-        let svgIndex = 0;
 
         for (const el of els) {
           const text = el.textContent ?? "";
           const fragment = doc.createDocumentFragment();
 
           for (const char of Array.from(text)) {
-            const svg = svgs[svgIndex];
-            if (svg) {
-              const clonedSvg = svg.cloneNode(true);
+            const entry = svgs.find((svgEntry) => svgEntry.char === char);
+            if (entry) {
+              const clonedSvg = entry.svg.cloneNode(true);
               if (clonedSvg instanceof SVGSVGElement) {
                 clonedSvg.setAttribute("data-kanjivg-svg", "");
               }
               fragment.append(clonedSvg);
-              svgIndex += 1;
             } else {
               fragment.append(char);
             }

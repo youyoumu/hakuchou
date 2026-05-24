@@ -2,15 +2,25 @@ import { parseToDoc } from "#/lib/dom";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js/types/server/reactive.js";
 
-const activeKanjivgTimers = new WeakMap<SVGSVGElement, ReturnType<typeof globalThis.setTimeout>[]>();
+const activeKanjivgTimers = new WeakMap<
+  SVGSVGElement,
+  ReturnType<typeof globalThis.setTimeout>[]
+>();
 
 function extractUnicodePoints(expression: string) {
   const text = parseToDoc(expression).body.textContent?.replace(/\u00a0/g, "") ?? "";
 
   return Array.from(text)
-    .map((char) => char.codePointAt(0))
-    .filter((codePoint): codePoint is number => typeof codePoint === "number")
-    .map((codePoint) => codePoint.toString(16).padStart(5, "0"));
+    .map((char) => {
+      const codePoint = char.codePointAt(0);
+      if (typeof codePoint !== "number") return null;
+
+      return {
+        char,
+        unicode: codePoint.toString(16).padStart(5, "0"),
+      };
+    })
+    .filter((entry): entry is { char: string; unicode: string } => entry !== null);
 }
 
 function colorizeKanjivg(svg: SVGSVGElement) {
@@ -118,7 +128,7 @@ async function loadKanjivg(unicode: string, signal?: AbortSignal) {
 }
 
 export function useKanjivg(kanji: Accessor<string>) {
-  const [$svgs, $setSvgs] = createSignal<Node[]>([]);
+  const [$svgs, $setSvgs] = createSignal<{ char: string; svg: Node }[]>([]);
 
   createEffect(() => {
     const controller = new AbortController();
@@ -141,11 +151,25 @@ export function useKanjivg(kanji: Accessor<string>) {
         return promise;
       };
 
-      const svgs = await Promise.all(unicodePoints.map((unicode) => loadCached(unicode)));
+      const svgs = await Promise.all(
+        unicodePoints.map((entry) => loadCached(entry.unicode)),
+      );
       if (controller.signal.aborted) return;
 
       $setSvgs(
-        svgs.filter((svg): svg is SVGSVGElement => svg !== null).map((svg) => svg.cloneNode(true)),
+        svgs
+          .map((svg, index) => ({
+            char: unicodePoints[index].char,
+            svg,
+          }))
+          .filter(
+            (entry): entry is { char: string; svg: SVGSVGElement } =>
+              entry.svg !== null && entry.svg !== undefined,
+          )
+          .map((entry) => ({
+            char: entry.char,
+            svg: entry.svg.cloneNode(true),
+          })),
       );
     })().catch((err) => {
       if (!controller.signal.aborted) {
