@@ -15,6 +15,7 @@ type CardContextValue = {
   $setCard: SetStoreFunction<CardStore>;
   $cardType: Accessor<CardType>;
   $relationType: Accessor<RelationType>;
+  $relationText: Accessor<string | null>;
 };
 
 const CardStoreContext = createContext<CardContextValue>();
@@ -51,8 +52,14 @@ export function CardStoreContextProvider(props: { children: JSX.Element; side: "
     return "unknown";
   });
 
+  const $relationText = createMemo(() => {
+    if ($relationType() === "tai") return "対";
+    if ($relationType() === "rui") return "類";
+    return null;
+  });
+
   return (
-    <CardStoreContext.Provider value={{ $card, $setCard, $cardType, $relationType }}>
+    <CardStoreContext.Provider value={{ $card, $setCard, $cardType, $relationType, $relationText }}>
       {props.children}
     </CardStoreContext.Provider>
   );

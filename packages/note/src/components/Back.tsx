@@ -8,13 +8,7 @@ import { useCardContext } from "#/contexts/CardContext";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
-  const { $cardType, $relationType } = useCardContext();
-
-  const $relationText = createMemo(() => {
-    if ($relationType() === "tai") return "対";
-    if ($relationType() === "rui") return "類";
-    return null;
-  });
+  const { $cardType, $relationType, $relationText } = useCardContext();
 
   onMount(() => {
     if (globalThis.HAKUCHOU) {
