@@ -21,7 +21,7 @@ export function Back() {
     <>
       <div class="flex flex-row-reverse gap-4">
         <div class="flex flex-col">
-          <div class="min-h-lh text-sm mb-1"></div>
+          <div class="min-h-lh text-sm mb-1 text-base-content-soft">{$ankiFields.Expression}</div>
           <Show when={$cardType() !== "kakitori"}>
             <Expression type={1} />
           </Show>

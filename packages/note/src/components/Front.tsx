@@ -19,7 +19,10 @@ export function Front() {
   return (
     <>
       <Show when={$cardType() === "kakitori"}>
-        <VerticalSentence />
+        <div class="flex flex-col">
+          <div class="min-h-lh text-sm mb-1">{$ankiFields.Expression}</div>
+          <VerticalSentence />
+        </div>
       </Show>
 
       <Show when={$cardType() === "kotowaza-yojijukugo"}>
