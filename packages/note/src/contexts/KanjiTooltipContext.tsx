@@ -1,4 +1,4 @@
-import { createContext, onCleanup, useContext } from "solid-js";
+import { createContext, onCleanup, Show, useContext } from "solid-js";
 import type { JSX } from "solid-js/jsx-runtime";
 import { createStore, type SetStoreFunction, type Store } from "solid-js/store";
 import { useBreakpointContext } from "#/contexts/BreakpointContext";
@@ -6,6 +6,7 @@ import { useGeneralContext } from "#/contexts/GeneralContext";
 import { computePosition, offset, flip, shift, arrow } from "@floating-ui/dom";
 import { createSignal, createEffect } from "solid-js";
 import { Portal } from "solid-js/web";
+import { KanjiData } from "#/components/KanjiData";
 
 type KanjiTooltipStore = {
   kanji: string;
@@ -183,13 +184,9 @@ function KanjiTooltip() {
           class="relative text-base bg-base-200/97 z-10 p-2 sm:p-4 border border-base-300 rounded-lg font-primary w-xs sm:w-md lg:w-lg shadow-lg max-h-[75vh] overflow-auto"
           style={{ color: "initial" }}
         >
-          {$kanjiTooltip.kanji}
-          {/* <KanjiContextProvider kanji={props.kanji}> */}
-          {/*   <KanjiInfo /> */}
-          {/*   <div class="text-sm mt-2 sm:mt-4 flex flex-col gap-1 sm:gap-2"> */}
-          {/*     <KanjiInfoExtra /> */}
-          {/*   </div> */}
-          {/* </KanjiContextProvider> */}
+          <Show when={$kanjiTooltip.kanji}>
+            <KanjiData kanji={$kanjiTooltip.kanji} />
+          </Show>
         </div>
       </div>
     </Portal>

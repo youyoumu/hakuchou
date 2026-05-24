@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "./daisyui.css";
 @import "./dictionary.css";
+@import "./kanji-data.css";
 @source "..";
 
 @utility vertical-rl {
