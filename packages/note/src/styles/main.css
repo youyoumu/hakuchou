@@ -80,6 +80,10 @@ body {
   position: relative;
 }
 
+#hakuchou-root[data-side="front"] .definition-field img {
+  display: none !important;
+}
+
 /* AnkiDroid */
 .android body > div#content {
   margin: 0;
