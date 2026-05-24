@@ -1,75 +1,9 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useCardContext } from "#/contexts/CardContext";
 import type { DatasetProp } from "#/lib/config";
-import { isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
-import { createMemo, createSignal, For, Show, type Component } from "solid-js";
-
-function censorTermsInHtml(html: string, terms: string[]) {
-  const normalizedTerms = terms.filter((term) => term.trim().length > 0);
-  if (!html || normalizedTerms.length === 0) return html;
-
-  const doc = parseToDoc(html);
-  const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT);
-  const textNodes: Text[] = [];
-
-  while (walker.nextNode()) {
-    textNodes.push(walker.currentNode as Text);
-  }
-
-  for (const node of textNodes) {
-    const text = node.nodeValue;
-    if (!text) continue;
-
-    const parent = node.parentElement;
-    if (parent?.closest("script,style,template")) continue;
-
-    const matches = normalizedTerms
-      .map((term) => ({ term, index: text.indexOf(term) }))
-      .filter((match) => match.index !== -1)
-      .sort((a, b) => a.index - b.index);
-
-    if (matches.length === 0) continue;
-
-    const fragment = doc.createDocumentFragment();
-    let cursor = 0;
-
-    for (const { term, index } of matches) {
-      if (index < cursor) continue;
-
-      if (index > cursor) {
-        fragment.append(text.slice(cursor, index));
-      }
-
-      const redactionGroup = doc.createElement("span");
-      redactionGroup.setAttribute(
-        "style",
-        "display:inline-flex;gap:0.1em;vertical-align:baseline;user-select:none;",
-      );
-
-      for (const char of term) {
-        const redaction = doc.createElement("span");
-        redaction.setAttribute(
-          "style",
-          "display:inline-block;background:var(--color-neutral);color:var(--color-neutral);line-height:1;border-radius:0.2em;padding:0 0em;min-width:0.6em;text-align:center;",
-        );
-        redaction.textContent = char;
-        redactionGroup.append(redaction);
-      }
-
-      fragment.append(redactionGroup);
-
-      cursor = index + term.length;
-    }
-
-    if (cursor < text.length) {
-      fragment.append(text.slice(cursor));
-    }
-
-    node.parentNode?.replaceChild(fragment, node);
-  }
-
-  return doc.body.innerHTML;
-}
+import { censorTermsInHtml, isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
+import { extractKanji } from "#/lib/kana";
+import { createMemo, createSignal, For, Show } from "solid-js";
 
 export function Definition(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -80,9 +14,6 @@ export function Definition(props: { type: 1 | 2 }) {
   );
   const $expression = createMemo(() =>
     $variant() === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
-  );
-  const $expressionReading = createMemo(() =>
-    $variant() === 1 ? $ankiFields.ExpressionReading : $ankiFields.ExpressionReading2,
   );
   const $userNotes = createMemo(() =>
     $variant() === 1 ? $ankiFields.UserNotes : $ankiFields.UserNotes2,
@@ -97,13 +28,12 @@ export function Definition(props: { type: 1 | 2 }) {
     const glossaryHtml = $glossary();
     const userNotes = !isHtmlEffectivelyEmpty(userNotesHtml) ? userNotesHtml : "";
     const glossary = !isHtmlEffectivelyEmpty(glossaryHtml) ? glossaryHtml : "";
+    const censoredTerms = [$expression(), ...extractKanji($expression())];
 
     if (userNotes) {
       p.push({
         name: "User Notes",
-        html: $shouldCensor()
-          ? censorTermsInHtml(userNotes, [$expression(), $expressionReading()])
-          : userNotes,
+        html: $shouldCensor() ? censorTermsInHtml(userNotes, censoredTerms) : userNotes,
       });
     }
 
@@ -127,7 +57,7 @@ export function Definition(props: { type: 1 | 2 }) {
             html: $shouldCensor()
               ? censorTermsInHtml(
                   `<div style="text-align: left;" class="yomitan-glossary"><ol>${styles}${html}</ol></div>`,
-                  [$expression(), $expressionReading()],
+                  censoredTerms,
                 )
               : `<div style="text-align: left;" class="yomitan-glossary"><ol>${styles}${html}</ol></div>`,
           });
@@ -135,9 +65,7 @@ export function Definition(props: { type: 1 | 2 }) {
       } else {
         p.push({
           name: "Glossary",
-          html: $shouldCensor()
-            ? censorTermsInHtml(glossary, [$expression(), $expressionReading()])
-            : glossary,
+          html: $shouldCensor() ? censorTermsInHtml(glossary, censoredTerms) : glossary,
         });
       }
     }
