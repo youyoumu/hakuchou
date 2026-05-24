@@ -34,6 +34,15 @@
     padding: 0;
     text-align: center;
   }
+
+  [data-kanjivg-svg] {
+    width: 0.9em !important;
+    height: 1.1em !important;
+    transform: translateX(-0.2em) scale(1.3) !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    writing-mode: horizontal-tb;
+  }
 }
 
 :root {

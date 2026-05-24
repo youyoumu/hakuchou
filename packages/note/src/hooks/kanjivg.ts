@@ -2,7 +2,7 @@ import { parseToDoc } from "#/lib/dom";
 import { createEffect, createSignal, onCleanup } from "solid-js";
 import type { Accessor } from "solid-js/types/server/reactive.js";
 
-const activeKanjivgTimers = new WeakMap<SVGSVGElement, number[]>();
+const activeKanjivgTimers = new WeakMap<SVGSVGElement, ReturnType<typeof globalThis.setTimeout>[]>();
 
 function extractUnicodePoints(expression: string) {
   const text = parseToDoc(expression).body.textContent?.replace(/\u00a0/g, "") ?? "";

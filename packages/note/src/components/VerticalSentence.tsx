@@ -1,5 +1,6 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useCardContext } from "#/contexts/CardContext";
+import { useKanjivg } from "#/hooks/kanjivg";
 import { useSentences } from "#/hooks/sentence";
 import { constant } from "#/lib/constant";
 import { parseToDoc } from "#/lib/dom";
@@ -31,17 +32,55 @@ export function VerticalSentence() {
     },
   });
 
+  const $kanjiText = createMemo(() => {
+    if ($card.side !== "back") return "";
+
+    const currentPage = $currentPage();
+    if (!currentPage) return "";
+
+    const doc = parseToDoc(currentPage.html);
+    return Array.from(doc.querySelectorAll("b"))
+      .map((el) => el.textContent ?? "")
+      .join("");
+  });
+
+  const { $svgs } = useKanjivg($kanjiText);
+
   const $sentence = createMemo(() => {
     const currentPage = $currentPage();
     if (!currentPage) return "";
     const doc = parseToDoc(currentPage.html);
     if ($cardType() === "kakitori") {
       const els = doc.querySelectorAll("b");
-      for (const el of els) {
-        if ($card.side === "front") {
+      if ($card.side === "front") {
+        for (const el of els) {
           el.innerHTML = hiraganaToKatakana($ankiFields.ExpressionReading);
+          el.classList.add("underline", "text-base-content-primary");
         }
-        el.classList.add("underline", "text-base-content-primary");
+      } else {
+        const svgs = $svgs();
+        let svgIndex = 0;
+
+        for (const el of els) {
+          const text = el.textContent ?? "";
+          const fragment = doc.createDocumentFragment();
+
+          for (const char of Array.from(text)) {
+            const svg = svgs[svgIndex];
+            if (svg) {
+              const clonedSvg = svg.cloneNode(true);
+              if (clonedSvg instanceof SVGSVGElement) {
+                clonedSvg.setAttribute("data-kanjivg-svg", "");
+              }
+              fragment.append(clonedSvg);
+              svgIndex += 1;
+            } else {
+              fragment.append(char);
+            }
+          }
+
+          el.replaceWith(fragment);
+        }
       }
     }
     return doc.body.innerHTML;
