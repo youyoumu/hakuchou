@@ -1,0 +1,680 @@
+/* Ensure file is not empty for Anki synchronization */
+
+/* =========================================
+   1. COMPLEX DICTIONARY VARIABLES
+   ========================================= */
+
+/* 大辞泉 */
+[data-dictionary*="大辞泉"] {
+  --daijisen-black: #ffffff;
+  --daijisen-white: #000000;
+  --daijisen-blue: #4a8ade;
+  --daijisen-header-djs: #b65058;
+  --daijisen-header-djsp: #999999;
+  --daijisen-header-text: #ffffff;
+  --daijisen-logo-color: black;
+  --daijisen-background-l3: black;
+  --daijisen-accent-mark: #cc0000;
+  --daijisen-accent-slash: #808080;
+}
+
+:is(.card.nightMode, .custom-dark-mode, [data-theme="dark"]) [data-dictionary*="大辞泉"] {
+  --daijisen-blue: #00aaff;
+  --daijisen-header-djs: #a0484f;
+  --daijisen-header-djsp: #7a7a7a;
+  --daijisen-header-text: #000000;
+  --daijisen-logo-color: #606060;
+  --daijisen-background-l3: #606060;
+  --daijisen-accent-mark: #ff6666;
+  --daijisen-accent-slash: #a0a0a0;
+}
+
+/* 小学館例解学習国語 */
+li[data-dictionary*="小学館例解学習国語"] {
+  --rgko12-light-blue: #7fb4f3;
+  --rgko12-light-light-blue: #ddeeff;
+  --rgko12-light-light-purple: #eeddff;
+  --rgko12-cream: #ffffdd;
+  --rgko12-spring: #ddffee;
+  --rgko12-summer: #ddffee;
+  --rgko12-autumn: #ffeecc;
+  --rgko12-winter: #cceeff;
+  --rgko12-travel: #ddffee;
+  --rgko12-romance: #eeddff;
+  --rgko12-other: #ffffcc;
+  --rgko12-red: #e84a4a;
+  --rgko12-orange: #ff9900;
+  --rgko12-light-orange: #ffcc99;
+  --rgko12-pink: #ff0099;
+  --rgko12-gray: rgba(0, 0, 0, 0.05);
+  --rgko12-brown: #976b33;
+  --rgko12-light-brown: #696158;
+  --rgko12-light-light-brown: ;
+  --rgko12-blue: ;
+  --rgko12-green: ;
+}
+
+:is(.card.nightMode, .custom-dark-mode, [data-theme="dark"])
+  li[data-dictionary*="小学館例解学習国語"] {
+  --rgko12-red: #d65252;
+  --rgko12-blue: ;
+  --rgko12-light-blue: #7dc9ef;
+  --rgko12-light-light-blue: #003366;
+  --rgko12-light-light-purple: #330033;
+  --rgko12-light-orange: #663300;
+  --rgko12-gray: rgba(255, 255, 255, 0.1);
+  --rgko12-brown: #885522;
+  --rgko12-light-brown: #696158;
+  --rgko12-light-light-brown: ;
+  --rgko12-cream: #333300;
+  --rgko12-green: ;
+}
+
+/* =========================================
+   2. DICTIONARY LAYOUT ADJUSTMENTS
+   ========================================= */
+
+/* 明鏡国語辞典 */
+.card.nightMode,
+.custom-dark-mode,
+[data-theme="dark"] {
+  --meikyo-white: #000000;
+  --meikyo-black: #cccccc;
+  --meikyo-blue: #33ccff;
+  --meikyo-red: #ff3333;
+  --meikyo-gray: #bbbbbb;
+  --meikyo-pink: #cc6666;
+  --meikyo-dark-red: #993333;
+  --meikyo-fbox-white: #ffffff;
+  --meikyo-fbox-gray: #cccccc;
+  --meikyo-box-gray: #663333;
+}
+
+li[data-dictionary*="明鏡国語辞典"] [data-sc-body],
+li[data-dictionary*="明鏡国語辞典"] span {
+  font-size: 1em !important;
+}
+
+[data-dictionary*="明鏡国語辞典"] div[data-sc-ruigo_items] {
+  display: none !important;
+}
+[data-dictionary*="明鏡国語辞典"] span[data-sc-fbox][data-sc-class="品格"] {
+  padding: 1px !important;
+}
+.yomitan-glossary[data-dictionary*="明鏡国語辞典"] div[data-sc-head2] {
+  margin-block-start: 0 !important;
+}
+.yomitan-glossary[data-dictionary*="明鏡国語辞典"] details {
+  margin-block: 0 !important;
+}
+[data-dictionary*="明鏡国語辞典"] [data-sc-body] {
+  line-height: 1.9em !important;
+}
+[data-dictionary*="明鏡国語辞典"] details:not(:last-child) summary {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.2rem !important;
+}
+
+li[data-dictionary*="明鏡国語辞典"] span[data-sc-small] {
+  font-size: 0.9em !important;
+  vertical-align: baseline !important;
+}
+
+li[data-dictionary*="明鏡国語辞典"] [data-sc-img][data-sc-gaiji] a[target="_blank"] {
+  width: 1.2em !important;
+  height: auto !important;
+  vertical-align: middle !important;
+  margin-inline-end: 0.2em !important;
+  display: inline-block !important;
+}
+
+/* 旺文社国語辞典 */
+li[data-dictionary*="旺文社国語辞典"] [data-sc縦中横] {
+  position: static !important;
+  white-space: nowrap !important;
+}
+
+li[data-dictionary*="旺文社国語辞典"] [data-sc縦中横] span,
+li[data-dictionary*="旺文社国語辞典"] [data-sc縦中横] > .gloss-sc-span {
+  writing-mode: horizontal-tb !important;
+  position: static !important;
+  transform: none !important;
+  display: inline !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+li[data-dictionary*="旺文社国語辞典"] [data-sc-img][data-sc-gaiji] a[target="_blank"] {
+  width: 1.2em !important;
+  height: auto !important;
+  vertical-align: -0.15em !important;
+  margin-inline: 0.1em !important;
+  display: inline-block !important;
+}
+
+/* 現代国語例解辞典 */
+li[data-dictionary*="現代国語例解辞典"] table {
+  display: none !important;
+}
+li[data-dictionary*="現代国語例解辞典"] div:has(> span > div > table) {
+  display: none !important;
+}
+
+/* 旺文社漢字典 第四版 */
+li[data-dictionary*="旺文社漢字典"] [data-sc解字] a[target="_blank"] {
+  width: 2.2em !important;
+  height: auto !important;
+  vertical-align: middle !important;
+  display: inline-block !important;
+}
+
+li[data-dictionary*="旺文社漢字典"] [data-sc字韻] a[target="_blank"] {
+  width: 1.4em !important;
+  height: auto !important;
+  vertical-align: bottom !important;
+  margin-inline: 0.2em !important;
+  display: inline-block !important;
+}
+
+li[data-dictionary*="旺文社漢字典"] [data-sc-gaiji] a[target="_blank"],
+li[data-dictionary*="旺文社漢字典"] a:has([data-sc-gaiji]) + a[target="_blank"] {
+  width: 1.2em !important;
+  height: auto !important;
+  vertical-align: middle !important;
+  margin-inline: 0.1em !important;
+  display: inline-block !important;
+}
+
+/* Universal Dark Mode Image Inversion */
+:is(.card.nightMode, .custom-dark-mode, [data-theme="dark"])
+  li[data-dictionary*="明鏡国語辞典"]
+  [data-sc-img]
+  img,
+:is(.card.nightMode, .custom-dark-mode, [data-theme="dark"])
+  li[data-dictionary*="旺文社国語辞典"]
+  [data-sc-img]
+  img,
+:is(.card.nightMode, .custom-dark-mode, [data-theme="dark"])
+  li[data-dictionary*="旺文社漢字典"]
+  a[target="_blank"]
+  img {
+  filter: invert(1) hue-rotate(180deg) !important;
+  mix-blend-mode: screen !important;
+}
+
+/* Global Dictionary Layout */
+li[data-dictionary] {
+  overflow-y: hidden !important;
+}
+
+/* =========================================
+   3. DICTIONARY TAG COLORS (LIGHT MODE) 
+   ========================================= */
+
+[data-dictionary*="JMdict"] {
+  --dictionary-color: #007acc;
+}
+[data-dictionary*="JMnedict"] {
+  --dictionary-color: #0097a7;
+}
+[data-dictionary*="Weblio"] {
+  --dictionary-color: #ea9034;
+}
+[data-dictionary*="新和英"] {
+  --dictionary-color: #005b32;
+}
+[data-dictionary*="新明解"] {
+  --dictionary-color: #cc0e3a;
+}
+[data-dictionary*="斎藤和英"] {
+  --dictionary-color: #d0c0e4;
+}
+[data-dictionary*="JLPT文法解説"] {
+  --dictionary-color: #d32f2f;
+}
+[data-dictionary*="大辞泉"] {
+  --dictionary-color: #720e16;
+}
+[data-dictionary*="大辞林"] {
+  --dictionary-color: #b75d91;
+}
+[data-dictionary*="広辞苑"] {
+  --dictionary-color: #424242;
+}
+
+[data-dictionary*="Wikipedia"] {
+  --dictionary-color: #3366cc;
+}
+[data-dictionary*="Jitendex"] {
+  --dictionary-color: #0a6354;
+}
+[data-dictionary*="Pixiv"] {
+  --dictionary-color: #0096fa;
+}
+[data-dictionary*="Wiktionary"] {
+  --dictionary-color: #ebcfa2;
+}
+[data-dictionary*="きっずジャポニカ"] {
+  --dictionary-color: #f4ea3d;
+}
+[data-dictionary*="どんなときどう使う"] {
+  --dictionary-color: #ffae05;
+}
+[data-dictionary*="ハイブリッド新辞林"] {
+  --dictionary-color: #1d1a25;
+}
+[data-dictionary*="三省堂国語辞典"] {
+  --dictionary-color: #ed6b31;
+}
+[data-dictionary*="使い方の分かる"] {
+  --dictionary-color: #083230;
+}
+[data-dictionary*="全国方言辞典"] {
+  --dictionary-color: #151e69;
+}
+[data-dictionary*="四字熟語辞典オンライン"] {
+  --dictionary-color: #ffbc00;
+}
+[data-dictionary*="学研四字熟語"] {
+  --dictionary-color: #1793b7;
+}
+[data-dictionary*="実用日本語表現辞典"] {
+  --dictionary-color: #848da7;
+}
+[data-dictionary*="小学館例解学習"] {
+  --dictionary-color: #fedc00;
+}
+[data-dictionary*="岩波国語辞典"] {
+  --dictionary-color: #bf9f92;
+}
+[data-dictionary*="故事ことわざの辞典"] {
+  --dictionary-color: #de6b29;
+}
+[data-dictionary*="故事・ことわざ・慣用句オンライン"] {
+  --dictionary-color: #ffbc00;
+}
+[data-dictionary*="新和英中辞典"] {
+  --dictionary-color: #e88947;
+}
+[data-dictionary*="新語時事用語"] {
+  --dictionary-color: #272262;
+}
+[data-dictionary*="新語・時事用語"] {
+  --dictionary-color: #272262;
+}
+[data-dictionary*="新選国語辞典"] {
+  --dictionary-color: #36478f;
+}
+[data-dictionary*="旺文社国語辞典"] {
+  --dictionary-color: #00a7ce;
+}
+[data-dictionary*="明鏡国語辞典"] {
+  --dictionary-color: #005190;
+}
+[data-dictionary*="漢字源"] {
+  --dictionary-color: #898000;
+}
+[data-dictionary*="漢字林"] {
+  --dictionary-color: #d7ebfb;
+}
+[data-dictionary*="漢検漢字辞典"] {
+  --dictionary-color: #e6a839;
+}
+[data-dictionary*="現代国語例解辞典"] {
+  --dictionary-color: #e23139;
+}
+[data-dictionary*="精選版　日本国語大辞典"] {
+  --dictionary-color: #969286;
+}
+[data-dictionary*="精選版 日本国語大辞典"] {
+  --dictionary-color: #969286;
+}
+[data-dictionary*="絵でわかる日本語"] {
+  --dictionary-color: #14703d;
+}
+[data-dictionary*="語彙力"] {
+  --dictionary-color: #0248a1;
+}
+[data-dictionary*="語源由来辞典"] {
+  --dictionary-color: #a58726;
+}
+[data-dictionary*="辞典オンライン"] {
+  --dictionary-color: #ffbc00;
+}
+[data-dictionary*="日本語俗語辞書"] {
+  --dictionary-color: #eace8f;
+}
+[data-dictionary*="日本語文法辞典"] {
+  --dictionary-color: #c4c287;
+}
+[data-dictionary*="類語辞典オンライン"] {
+  --dictionary-color: #ffbc00;
+}
+[data-dictionary*="ことわざ・慣用句の百科事典"] {
+  --dictionary-color: #161e26;
+}
+[data-dictionary*="四字熟語の百科事典"] {
+  --dictionary-color: #5dac66;
+}
+[data-dictionary*="絵でわかる慣用句"] {
+  --dictionary-color: #6bbf8d;
+}
+[data-dictionary*="対義語辞典オンライン"] {
+  --dictionary-color: #ffbc00;
+}
+[data-dictionary*="Onomatoproject"] {
+  --dictionary-color: #2b5b76;
+}
+[data-dictionary*="擬音語・擬態語辞典"] {
+  --dictionary-color: #c8afb2;
+}
+[data-dictionary*="sukkiri"] {
+  --dictionary-color: #eff267;
+}
+[data-dictionary*="新明解四字熟語辞典"] {
+  --dictionary-color: #00d5cf;
+}
+[data-dictionary*="国語辞典オンライン"] {
+  --dictionary-color: #ffbc00;
+}
+[data-dictionary*="三省堂全訳読解古語辞典"] {
+  --dictionary-color: #8d5b9f;
+}
+[data-dictionary*="全訳読解古語辞典"] {
+  --dictionary-color: #8d5b9f;
+}
+[data-dictionary*="旺文社全訳古語辞典"] {
+  --dictionary-color: #b1dce2;
+}
+[data-dictionary*="全訳古語辞典"] {
+  --dictionary-color: #b1dce2;
+}
+[data-dictionary*="有斐閣法律用語辞典"] {
+  --dictionary-color: #151489;
+}
+[data-dictionary*="南山堂医学大辞典"] {
+  --dictionary-color: #583741;
+}
+[data-dictionary*="有斐閣現代心理学辞典"] {
+  --dictionary-color: #de547c;
+}
+[data-dictionary*="KO字源"] {
+  --dictionary-color: #4d3e83;
+}
+[data-dictionary*="角川新字源"] {
+  --dictionary-color: #f0833c;
+}
+[data-dictionary*="旺文社漢字典"] {
+  --dictionary-color: #7a318d;
+}
+[data-dictionary*="字通"] {
+  --dictionary-color: #ebae51;
+}
+[data-dictionary*="TISMKANJI"] {
+  --dictionary-color: #ff44d5;
+}
+[data-dictionary*="Weblio古語辞典"] {
+  --dictionary-color: #c27b94;
+}
+[data-dictionary*="JLPT文法解説まとめ"] {
+  --dictionary-color: #b71c1c;
+}
+[data-dictionary*="漢字ペディア"] {
+  --dictionary-color: #757575;
+}
+[data-dictionary*="新彩図和英辞典"] {
+  --dictionary-color: #b590c8;
+}
+[data-dictionary*="まいにちのんびり日本語"] {
+  --dictionary-color: #eaa6b9;
+}
+[data-dictionary*="素材辞典"] {
+  --dictionary-color: #4a8b95;
+}
+[data-dictionary*="例解学習国語辞典"] {
+  --dictionary-color: #d28a22;
+}
+[data-dictionary*="wty-ja-ja"] {
+  --dictionary-color: #4b6a80;
+}
+[data-dictionary*="現代新国語辞典 第七版"] {
+  --dictionary-color: #18446e;
+}
+
+/* =========================================
+   4. DICTIONARY TAG COLORS (DARK MODE) 
+   ========================================= */
+
+:is(.card.nightMode, .custom-dark-mode, [data-theme="dark"]) {
+  [data-dictionary*="JMdict"] {
+    --dictionary-color: #4ab5ff;
+  }
+  [data-dictionary*="JMnedict"] {
+    --dictionary-color: #33c9d6;
+  }
+  [data-dictionary*="Weblio"] {
+    --dictionary-color: #f4ab5f;
+  }
+  [data-dictionary*="新和英"] {
+    --dictionary-color: #118f55;
+  }
+  [data-dictionary*="新明解"] {
+    --dictionary-color: #ff5273;
+  }
+  [data-dictionary*="斎藤和英"] {
+    --dictionary-color: #dfcff2;
+  }
+  [data-dictionary*="JLPT文法解説"] {
+    --dictionary-color: #ff6666;
+  }
+  [data-dictionary*="大辞泉"] {
+    --dictionary-color: #e84a56;
+  }
+  [data-dictionary*="大辞林"] {
+    --dictionary-color: #d687b5;
+  }
+  [data-dictionary*="広辞苑"] {
+    --dictionary-color: #a3a3a3;
+  }
+
+  [data-dictionary*="Wikipedia"] {
+    --dictionary-color: #6495ed;
+  }
+  [data-dictionary*="Jitendex"] {
+    --dictionary-color: #1aa88f;
+  }
+  [data-dictionary*="Pixiv"] {
+    --dictionary-color: #4db8ff;
+  }
+  [data-dictionary*="Wiktionary"] {
+    --dictionary-color: #f7e1b7;
+  }
+  [data-dictionary*="きっずジャポニカ"] {
+    --dictionary-color: #fdf569;
+  }
+  [data-dictionary*="どんなときどう使う"] {
+    --dictionary-color: #ffc445;
+  }
+  [data-dictionary*="ハイブリッド新辞林"] {
+    --dictionary-color: #7a738f;
+  }
+  [data-dictionary*="三省堂国語辞典"] {
+    --dictionary-color: #fc8853;
+  }
+  [data-dictionary*="使い方の分かる"] {
+    --dictionary-color: #35948f;
+  }
+  [data-dictionary*="全国方言辞典"] {
+    --dictionary-color: #616de3;
+  }
+  [data-dictionary*="四字熟語辞典オンライン"] {
+    --dictionary-color: #ffd24d;
+  }
+  [data-dictionary*="学研四字熟語"] {
+    --dictionary-color: #40bce3;
+  }
+  [data-dictionary*="実用日本語表現辞典"] {
+    --dictionary-color: #a6b0cf;
+  }
+  [data-dictionary*="小学館例解学習"] {
+    --dictionary-color: #ffe640;
+  }
+  [data-dictionary*="岩波国語辞典"] {
+    --dictionary-color: #d6b7aa;
+  }
+  [data-dictionary*="故事ことわざの辞典"] {
+    --dictionary-color: #f28646;
+  }
+  [data-dictionary*="故事・ことわざ・慣用句オンライン"] {
+    --dictionary-color: #ffd24d;
+  }
+  [data-dictionary*="新和英中辞典"] {
+    --dictionary-color: #efa46c;
+  }
+  [data-dictionary*="新語時事用語"] {
+    --dictionary-color: #6e66c7;
+  }
+  [data-dictionary*="新語・時事用語"] {
+    --dictionary-color: #6e66c7;
+  }
+  [data-dictionary*="新選国語辞典"] {
+    --dictionary-color: #6173c4;
+  }
+  [data-dictionary*="旺文社国語辞典"] {
+    --dictionary-color: #33c2e3;
+  }
+  [data-dictionary*="明鏡国語辞典"] {
+    --dictionary-color: #3d8cc9;
+  }
+  [data-dictionary*="漢字源"] {
+    --dictionary-color: #c9bc40;
+  }
+  [data-dictionary*="漢字林"] {
+    --dictionary-color: #d7ebfb;
+  }
+  [data-dictionary*="漢検漢字辞典"] {
+    --dictionary-color: #f7c059;
+  }
+  [data-dictionary*="現代国語例解辞典"] {
+    --dictionary-color: #f0545c;
+  }
+  [data-dictionary*="精選版　日本国語大辞典"] {
+    --dictionary-color: #b5b1a3;
+  }
+  [data-dictionary*="精選版 日本国語大辞典"] {
+    --dictionary-color: #b5b1a3;
+  }
+  [data-dictionary*="絵でわかる日本語"] {
+    --dictionary-color: #2b9e59;
+  }
+  [data-dictionary*="語彙力"] {
+    --dictionary-color: #4185db;
+  }
+  [data-dictionary*="語源由来辞典"] {
+    --dictionary-color: #c7aa4a;
+  }
+  [data-dictionary*="辞典オンライン"] {
+    --dictionary-color: #ffd24d;
+  }
+  [data-dictionary*="日本語俗語辞書"] {
+    --dictionary-color: #f2dabb;
+  }
+  [data-dictionary*="日本語文法辞典"] {
+    --dictionary-color: #dcdba9;
+  }
+  [data-dictionary*="類語辞典オンライン"] {
+    --dictionary-color: #ffd24d;
+  }
+  [data-dictionary*="ことわざ・慣用句の百科事典"] {
+    --dictionary-color: #576b80;
+  }
+  [data-dictionary*="四字熟語の百科事典"] {
+    --dictionary-color: #79c982;
+  }
+  [data-dictionary*="絵でわかる慣用句"] {
+    --dictionary-color: #8ed6ac;
+  }
+  [data-dictionary*="対義語辞典オンライン"] {
+    --dictionary-color: #ffd24d;
+  }
+  [data-dictionary*="Onomatoproject"] {
+    --dictionary-color: #5289a8;
+  }
+  [data-dictionary*="擬音語・擬態語辞典"] {
+    --dictionary-color: #e0c8cb;
+  }
+  [data-dictionary*="sukkiri"] {
+    --dictionary-color: #f6f88d;
+  }
+  [data-dictionary*="新明解四字熟語辞典"] {
+    --dictionary-color: #33e6e1;
+  }
+  [data-dictionary*="国語辞典オンライン"] {
+    --dictionary-color: #ffd24d;
+  }
+  [data-dictionary*="三省堂全訳読解古語辞典"] {
+    --dictionary-color: #b285c4;
+  }
+  [data-dictionary*="全訳読解古語辞典"] {
+    --dictionary-color: #b285c4;
+  }
+  [data-dictionary*="旺文社全訳古語辞典"] {
+    --dictionary-color: #d0f0f5;
+  }
+  [data-dictionary*="全訳古語辞典"] {
+    --dictionary-color: #d0f0f5;
+  }
+  [data-dictionary*="有斐閣法律用語辞典"] {
+    --dictionary-color: #6967eb;
+  }
+  [data-dictionary*="南山堂医学大辞典"] {
+    --dictionary-color: #8f5c6c;
+  }
+  [data-dictionary*="有斐閣現代心理学辞典"] {
+    --dictionary-color: #f27297;
+  }
+  [data-dictionary*="KO字源"] {
+    --dictionary-color: #7f6ec4;
+  }
+  [data-dictionary*="角川新字源"] {
+    --dictionary-color: #fa9b5a;
+  }
+  [data-dictionary*="旺文社漢字典"] {
+    --dictionary-color: #a453b8;
+  }
+  [data-dictionary*="字通"] {
+    --dictionary-color: #f5c476;
+  }
+  [data-dictionary*="TISMKANJI"] {
+    --dictionary-color: #ff85e6;
+  }
+  [data-dictionary*="Weblio古語辞典"] {
+    --dictionary-color: #e099b2;
+  }
+  [data-dictionary*="JLPT文法解説まとめ"] {
+    --dictionary-color: #e04141;
+  }
+  [data-dictionary*="漢字ペディア"] {
+    --dictionary-color: #b7b7b7;
+  }
+  [data-dictionary*="新彩図和英辞典"] {
+    --dictionary-color: #f4e1fe;
+  }
+  [data-dictionary*="まいにちのんびり日本語"] {
+    --dictionary-color: #ffd8e4;
+  }
+  [data-dictionary*="素材辞典"] {
+    --dictionary-color: #65b3bf;
+  }
+  [data-dictionary*="例解学習国語辞典"] {
+    --dictionary-color: #faa72f;
+  }
+  [data-dictionary*="wty-ja-ja"] {
+    --dictionary-color: #82a8c7;
+  }
+  [data-dictionary*="現代新国語辞典 第七版"] {
+    --dictionary-color: #5d9cd9;
+  }
+}
