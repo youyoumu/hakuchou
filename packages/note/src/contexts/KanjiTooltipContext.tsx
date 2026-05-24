@@ -7,6 +7,7 @@ import { computePosition, offset, flip, shift, arrow } from "@floating-ui/dom";
 import { createSignal, createEffect } from "solid-js";
 import { Portal } from "solid-js/web";
 import { KanjiData } from "#/components/KanjiData";
+import { extractKanji } from "#/lib/kana";
 
 type KanjiTooltipStore = {
   kanji: string;
@@ -52,6 +53,7 @@ export function KanjiTooltipContextProvider(props: { children: JSX.Element }) {
 
   function onActive(event: MouseEvent | TouchEvent | FocusEvent, kanji: string = "") {
     if (!kanji) return;
+    if (!extractKanji(kanji).length) return;
     if (!(event.currentTarget instanceof Element)) return;
     clearHideTimeout();
     $setKanjiTooltip("show", true);
