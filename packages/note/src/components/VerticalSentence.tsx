@@ -85,7 +85,12 @@ export function VerticalSentence() {
   });
 
   return (
-    <div class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg flex-1">
+    <div
+      class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg flex-1"
+      classList={{
+        "pe-6": $card.side === "front",
+      }}
+    >
       <div
         class="text-5xl vertical-rl underline-offset-4 leading-12 tracking-widest"
         innerHTML={$sentence()}
