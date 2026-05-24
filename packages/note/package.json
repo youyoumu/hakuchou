@@ -17,6 +17,7 @@
     "generate-apkg": "pnpm run apply && vite-node ./script/generate-apkg.ts"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.7.6",
     "solid-js": "^1.9.13"
   },
   "devDependencies": {

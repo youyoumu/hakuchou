@@ -48,19 +48,23 @@ function useBreakpoint() {
     });
   });
 
-  return { $breakpoint };
+  const isAtLeast = (bp: Breakpoint) => order.indexOf($breakpoint()) >= order.indexOf(bp);
+
+  return { $breakpoint, isAtLeast };
 }
 
 const BreakpointContext = createContext<{
   $breakpoint: Accessor<Breakpoint>;
+  isAtLeast: (bp: Breakpoint) => boolean;
 }>();
 
 export function BreakpointContextProvider(props: { children: JSX.Element }) {
-  const { $breakpoint } = useBreakpoint();
+  const { $breakpoint, isAtLeast } = useBreakpoint();
   return (
     <BreakpointContext.Provider
       value={{
         $breakpoint,
+        isAtLeast,
       }}
     >
       {props.children}

@@ -13,6 +13,7 @@ type GeneralStore = {
   assetsPath: string;
   aborter: AbortController;
   isAnkiConnectAvailable: boolean;
+  layoutRef: HTMLDivElement | undefined;
 };
 
 type GeneralContextValue = {
@@ -41,6 +42,7 @@ export function GeneralContextProvider(props: {
     assetsPath: props.assetsPath,
     aborter: props.aborter,
     isAnkiConnectAvailable: false,
+    layoutRef: undefined,
   });
 
   return (

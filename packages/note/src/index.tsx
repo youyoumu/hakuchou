@@ -26,6 +26,7 @@ import { CardStoreContextProvider } from "./contexts/CardContext";
 import { Layout } from "./components/Layout";
 import { Front } from "./components/Front";
 import { Back } from "./components/Back";
+import { KanjiTooltipContextProvider } from "./contexts/KanjiTooltipContext";
 
 export async function init({
   root,
@@ -75,7 +76,9 @@ export async function init({
           <ConfigContextProvider value={{ $config, $setConfig }}>
             <AnkiFieldContextProvider initialAnkiFields={ankiFields}>
               <CardStoreContextProvider side={side}>
-                <Layout>{side === "front" ? <Front /> : <Back />}</Layout>
+                <KanjiTooltipContextProvider>
+                  <Layout>{side === "front" ? <Front /> : <Back />}</Layout>
+                </KanjiTooltipContextProvider>
               </CardStoreContextProvider>
             </AnkiFieldContextProvider>
           </ConfigContextProvider>
