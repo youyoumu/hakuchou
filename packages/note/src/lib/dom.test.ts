@@ -1,6 +1,7 @@
 import { beforeAll, afterAll, describe, expect, test } from "vitest";
 import { JSDOM } from "jsdom";
 import { censorTermsInHtml } from "./dom";
+import { extractKanji } from "./kana";
 
 const originalGlobals = {
   DOMParser: globalThis.DOMParser,
@@ -50,11 +51,22 @@ describe("censorTermsInHtml", () => {
     expect(censorTermsInHtml(html, ["secret", "hidden", "nope"])).toBe(html);
   });
 
-  test("censors the first match in a text node and keeps the rest intact", () => {
+  test("censors repeated matches in a text node", () => {
     const html = "<p>abc abc</p>";
 
     expect(censorTermsInHtml(html, ["abc"])).toBe(
-      '<p><span data-censor-term-group=""><span data-censor-term-char="">a</span><span data-censor-term-char="">b</span><span data-censor-term-char="">c</span></span> abc</p>',
+      '<p><span data-censor-term-group=""><span data-censor-term-char="">a</span><span data-censor-term-char="">b</span><span data-censor-term-char="">c</span></span> <span data-censor-term-group=""><span data-censor-term-char="">a</span><span data-censor-term-char="">b</span><span data-censor-term-char="">c</span></span></p>',
+    );
+  });
+
+  test("censors kanji extracted from the term in other text", () => {
+    const html =
+      "<p>可愛い子には旅をさせよという言葉のように、早くから、子供のやることには口を出さず自分で決めてもらっている。</p>";
+
+    const term = "可愛い子には旅をさせよ";
+
+    expect(censorTermsInHtml(html, [term, ...extractKanji(term)])).toBe(
+      "<p><span data-censor-term-group=\"\"><span data-censor-term-char=\"\">可</span><span data-censor-term-char=\"\">愛</span><span data-censor-term-char=\"\">い</span><span data-censor-term-char=\"\">子</span><span data-censor-term-char=\"\">に</span><span data-censor-term-char=\"\">は</span><span data-censor-term-char=\"\">旅</span><span data-censor-term-char=\"\">を</span><span data-censor-term-char=\"\">さ</span><span data-censor-term-char=\"\">せ</span><span data-censor-term-char=\"\">よ</span></span>という言葉のように、早くから、<span data-censor-term-group=\"\"><span data-censor-term-char=\"\">子</span></span>供のやることには口を出さず自分で決めてもらっている。</p>",
     );
   });
 });

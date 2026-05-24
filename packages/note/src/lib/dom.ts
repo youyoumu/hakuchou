@@ -25,7 +25,7 @@ export function isHtmlEffectivelyEmpty(html: string): boolean {
 }
 
 export function censorTermsInHtml(html: string, terms: string[]) {
-  const normalizedTerms = terms.filter((term) => term.trim().length > 0);
+  const normalizedTerms = [...new Set(terms.filter((term) => term.trim().length > 0))];
   if (!html || normalizedTerms.length === 0) return html;
 
   const doc = parseToDoc(html);
@@ -44,9 +44,21 @@ export function censorTermsInHtml(html: string, terms: string[]) {
     if (parent?.closest("script,style,template")) continue;
 
     const matches = normalizedTerms
-      .map((term) => ({ term, index: text.indexOf(term) }))
-      .filter((match) => match.index !== -1)
-      .sort((a, b) => a.index - b.index);
+      .flatMap((term) => {
+        const termMatches: Array<{ term: string; index: number }> = [];
+        let startIndex = 0;
+
+        while (startIndex < text.length) {
+          const index = text.indexOf(term, startIndex);
+          if (index === -1) break;
+
+          termMatches.push({ term, index });
+          startIndex = index + term.length;
+        }
+
+        return termMatches;
+      })
+      .sort((a, b) => a.index - b.index || b.term.length - a.term.length);
 
     if (matches.length === 0) continue;
 
