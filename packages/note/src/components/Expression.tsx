@@ -10,6 +10,7 @@ export function Expression(props: { type: 1 | 2 }) {
     props.type === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
   );
   const { $svgs } = useKanjivg(() => $expression());
+  const $isLong = createMemo(() => $expression().length > 8);
 
   function handleKanjivgClick(event: MouseEvent) {
     if (!(event.target instanceof Element)) return;
@@ -47,9 +48,11 @@ export function Expression(props: { type: 1 | 2 }) {
     >
       <RelationIndicator />
       <div
-        class="vertical-rl underline-offset-4 leading-22 tracking-[0.2em] text-7xl py-2"
+        class="vertical-rl underline-offset-4 leading-22 tracking-[0.2em] text-7xl py-2 text-nowrap"
         classList={{
           hidden: $card.side === "back",
+          "text-7xl": !$isLong(),
+          "text-6xl": $isLong(),
         }}
         innerHTML={$expression()}
       ></div>
@@ -59,6 +62,8 @@ export function Expression(props: { type: 1 | 2 }) {
         on:click={handleKanjivgClick}
         classList={{
           hidden: $card.side === "front",
+          "w-24": !$isLong(),
+          "w-20": $isLong(),
         }}
       >
         {$svgs()}
