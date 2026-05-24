@@ -1,10 +1,12 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useCardContext } from "#/contexts/CardContext";
+import { useKanjiTooltipContext } from "#/contexts/KanjiTooltipContext";
 import { useKanjivg, animateKanjivgStrokes } from "#/hooks/kanjivg";
-import { createMemo, Show } from "solid-js";
+import { createMemo, For, Show } from "solid-js";
 
 export function Expression(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
+  const { onInactive, onActive } = useKanjiTooltipContext();
   const { $cardType, $relationType, $card, $relationText } = useCardContext();
   const $expression = createMemo(() =>
     props.type === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
@@ -58,15 +60,29 @@ export function Expression(props: { type: 1 | 2 }) {
       ></div>
 
       <div
-        class="flex flex-col justify-start w-24"
-        on:click={handleKanjivgClick}
+        class="flex flex-col justify-start"
         classList={{
           hidden: $card.side === "front",
           "w-24": !$isLong(),
           "w-20": $isLong(),
         }}
       >
-        {$svgs()}
+        <For each={$svgs()}>
+          {(entry) => {
+            return (
+              <span
+                on:click={handleKanjivgClick}
+                on:mouseenter={(e) => onActive(e, entry.char)}
+                on:mouseleave={onInactive}
+                on:focus={(e) => onActive(e, entry.char)}
+                on:blur={onInactive}
+                on:touchstart={(e) => onActive(e, entry.char)}
+              >
+                {entry.svg}
+              </span>
+            );
+          }}
+        </For>
       </div>
     </div>
   );
