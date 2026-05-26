@@ -51,6 +51,7 @@ export type Dataset = {
   "data-theme": string;
   "data-dictionary": string
   "data-pitch-type": string;
+  "data-kanken-level": string;
 };
 
 export type DatasetProp = Partial<Dataset>;

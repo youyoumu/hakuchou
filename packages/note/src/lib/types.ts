@@ -23,6 +23,7 @@ export type AnkiFields = {
   Frequency2: string;
   FreqSort2: string;
 
+  KanKenLevel: string;
   Kakitori: string;
   KotowazaYojijukugo: string;
   TaigigoRuigigo: string;
@@ -76,6 +77,7 @@ export const ankiFieldsSkeleton: AnkiFields = {
   Frequency2: "",
   FreqSort2: "",
 
+  KanKenLevel: "",
   Kakitori: "",
   KotowazaYojijukugo: "",
   TaigigoRuigigo: "",

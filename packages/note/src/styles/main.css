@@ -189,3 +189,44 @@ body {
 [data-pitch-type*="kifuku"] {
   --pitch-color: var(--pitch-purple) !important;
 }
+
+[data-kanken-level="10"] {
+  background-color: #a3e4d7;
+  color: #333333;
+}
+[data-kanken-level="9"] {
+  background-color: #73c6b6;
+  color: #333333;
+}
+[data-kanken-level="8"] {
+  background-color: #48c9b0;
+}
+[data-kanken-level="7"] {
+  background-color: #1abc9c;
+}
+[data-kanken-level="6"] {
+  background-color: #5dade2;
+}
+[data-kanken-level="5"] {
+  background-color: #3498db;
+}
+[data-kanken-level="4"] {
+  background-color: #2874a6;
+}
+[data-kanken-level="3"] {
+  background-color: #af7ac5;
+}
+[data-kanken-level="準2"],
+[data-kanken-level="j2"] {
+  background-color: #9b59b6;
+}
+[data-kanken-level="2"] {
+  background-color: #e67e22;
+}
+[data-kanken-level="準1"],
+[data-kanken-level="j1"] {
+  background-color: #e74c3c;
+}
+[data-kanken-level="1"] {
+  background-color: #922b21;
+}

@@ -24,6 +24,7 @@ export const exampleFields: AnkiFields = {
   "PitchCategories2": "kifuku,heiban",
   "Frequency2": "<ul style=\"text-align: left;\"><li>Jiten: 22561</li><li>Jiten: 147873㋕</li><li>JPDBv2㋕: 25224</li></ul>",
   "FreqSort2": "23818",
+  "KanKenLevel": "",
   "Kakitori": "",
   "KotowazaYojijukugo": "",
   "TaigigoRuigigo": "対",

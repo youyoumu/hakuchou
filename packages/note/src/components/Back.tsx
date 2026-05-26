@@ -9,6 +9,7 @@ import { VerticalSentence } from "./VerticalSentence";
 import { Frequency } from "./Frequency";
 import { AudioButtons } from "./AudioButtons";
 import Pitches from "./Pitches";
+import { KanKenLevel } from "./KanKenLevel";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -32,7 +33,10 @@ export function Back() {
               <Pitches type={1} />
             </div>
           </div>
-          <Frequency type={1} />
+          <div class="flex gap-2 items-center">
+            <KanKenLevel />
+            <Frequency type={1} />
+          </div>
         </div>
         <div class="flex flex-row-reverse gap-4">
           <div class="flex flex-col">
@@ -75,13 +79,14 @@ export function Back() {
                 <Pitches type={2} />
               </div>
             </div>
-            <Frequency type={2} />
+            <div class="flex gap-2 items-center">
+              {/* <KanKenLevel /> */}
+              <Frequency type={2} />
+            </div>
           </div>
           <div class="flex flex-row-reverse gap-4">
             <div class="flex flex-col">
-              <div class="min-h-lh text-sm mb-1 text-base-content-soft">
-                {$ankiFields.Expression2}
-              </div>
+              <div class="min-h-lh text-sm mb-1 text-base-content-soft"></div>
               <Expression type={2} />
             </div>
             <div class="flex-1">
