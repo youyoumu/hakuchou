@@ -137,7 +137,7 @@ export function VerticalSentence() {
         ref={(el) => {
           sentenceRef = el;
         }}
-        class="text-5xl vertical-rl underline-offset-4 leading-20 tracking-widest"
+        class="text-6xl vertical-rl underline-offset-4 leading-24 tracking-widest"
         innerHTML={$sentence()}
       ></div>
     </div>
