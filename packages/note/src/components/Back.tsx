@@ -1,12 +1,13 @@
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
-import { createMemo, onMount, Show } from "solid-js";
+import { onMount, Show } from "solid-js";
 import { unwrap } from "solid-js/store";
 import { Sentence } from "./Sentence";
 import { Definition } from "./Definition";
 import { Expression } from "./Expression";
 import { useCardContext } from "#/contexts/CardContext";
 import { VerticalSentence } from "./VerticalSentence";
-import Frequency from "./Frequency";
+import { Frequency } from "./Frequency";
+import { AudioButtons } from "./AudioButtons";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -21,7 +22,10 @@ export function Back() {
   return (
     <>
       <div class="flex flex-col gap-2">
-        <div class="flex justify-end">
+        <div class="flex justify-between">
+          <div class="flex gap-2">
+            <AudioButtons type={1} />
+          </div>
           <Frequency type={1} />
         </div>
         <div class="flex flex-row-reverse gap-4">
@@ -56,7 +60,10 @@ export function Back() {
         </div>
 
         <div class="flex flex-col gap-2">
-          <div class="flex justify-end">
+          <div class="flex justify-between">
+            <div class="flex gap-2">
+              <AudioButtons type={2} />
+            </div>
             <Frequency type={2} />
           </div>
           <div class="flex flex-row-reverse gap-4">

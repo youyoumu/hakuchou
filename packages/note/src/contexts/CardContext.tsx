@@ -5,6 +5,8 @@ import { useAnkiFieldContext } from "./AnkiFieldsContext";
 
 type CardStore = {
   side: "front" | "back";
+  expressionAudioRef?: HTMLDivElement;
+  expressionAudio2Ref?: HTMLDivElement;
 };
 
 type CardType = "kakitori" | "kotowaza-yojijukugo" | "taigigo-ruigigo";
@@ -24,6 +26,8 @@ export function CardStoreContextProvider(props: { children: JSX.Element; side: "
   const { $ankiFields } = useAnkiFieldContext<"front" | "back">();
   const [$card, $setCard] = createStore<CardStore>({
     side: props.side,
+    expressionAudioRef: undefined,
+    expressionAudio2Ref: undefined,
   });
 
   const $cardType = createMemo<CardType>(() => {
