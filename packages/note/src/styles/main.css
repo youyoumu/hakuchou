@@ -95,6 +95,10 @@ body {
   display: none !important;
 }
 
+#hakuchou-root[data-side="front"] .definition-field span[style*="display:inline-block"]:has(> img) {
+  display: none !important;
+}
+
 /* AnkiDroid */
 .android body > div#content {
   margin: 0;
