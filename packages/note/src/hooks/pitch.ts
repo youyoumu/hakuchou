@@ -32,7 +32,7 @@ export function usePitch(props: { type: 1 | 2 }) {
     props.type === 1 ? $ankiFields.PitchPosition : $ankiFields.PitchPosition2,
   );
   const $reading = createMemo(() =>
-    props.type === 1 ? $ankiFields.Expression : $ankiFields.Expression2,
+    props.type === 1 ? $ankiFields.ExpressionReading : $ankiFields.ExpressionReading2,
   );
   const $pitchNumbers = createMemo(() => extractPitchNumbers($pitchPosition()));
 

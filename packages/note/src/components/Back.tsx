@@ -24,7 +24,7 @@ export function Back() {
   return (
     <>
       <div class="flex flex-col gap-2">
-        <div class="flex justify-between">
+        <div class="flex justify-between gap-2">
           <div class="flex gap-4 items-center">
             <div class="flex gap-2">
               <AudioButtons type={1} />
@@ -67,7 +67,7 @@ export function Back() {
         </div>
 
         <div class="flex flex-col gap-2">
-          <div class="flex justify-between">
+          <div class="flex justify-between gap-2">
             <div class="flex gap-4 items-center">
               <div class="flex gap-2">
                 <AudioButtons type={2} />
