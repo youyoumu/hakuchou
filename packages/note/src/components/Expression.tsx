@@ -41,7 +41,7 @@ export function Expression(props: { type: 1 | 2 }) {
 
   return (
     <div
-      class="flex gap-4 flex-1 p-4 bg-base-200 rounded-lg relative justify-center"
+      class="flex gap-4 p-4 bg-base-200 rounded-lg relative justify-center"
       classList={{
         "ps-8": $card.side === "front",
         "border-s-4": $cardType() === "taigigo-ruigigo",
