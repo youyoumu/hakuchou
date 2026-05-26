@@ -27,7 +27,7 @@ export function Expression(props: { type: 1 | 2 }) {
         when={$card.side === "front" && ($relationType() === "rui" || $relationType() === "tai")}
       >
         <div
-          class="absolute top-4 left-4 flex justify-center items-center"
+          class="absolute top-1/2 -translate-y-1/2 left-4 flex justify-center items-center"
           classList={{
             "text-success": $relationType() === "rui",
             "text-error": $relationType() === "tai",
@@ -43,6 +43,7 @@ export function Expression(props: { type: 1 | 2 }) {
     <div
       class="flex gap-4 flex-1 p-4 bg-base-200 rounded-lg relative justify-center"
       classList={{
+        "ps-8": $card.side === "front",
         "border-s-4": $cardType() === "taigigo-ruigigo",
         "border-success": $relationType() === "rui",
         "border-error": $relationType() === "tai",
@@ -50,7 +51,7 @@ export function Expression(props: { type: 1 | 2 }) {
     >
       <RelationIndicator />
       <div
-        class="vertical-rl underline-offset-4 leading-22 tracking-[0.2em] text-7xl py-2 text-nowrap"
+        class="vertical-rl underline-offset-4 leading-24 tracking-[0.3em] text-7xl py-2 text-nowrap"
         classList={{
           hidden: $card.side === "back",
           "text-7xl": !$isLong(),
