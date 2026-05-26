@@ -8,6 +8,7 @@ import { useCardContext } from "#/contexts/CardContext";
 import { VerticalSentence } from "./VerticalSentence";
 import { Frequency } from "./Frequency";
 import { AudioButtons } from "./AudioButtons";
+import Pitches from "./Pitches";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -23,8 +24,13 @@ export function Back() {
     <>
       <div class="flex flex-col gap-2">
         <div class="flex justify-between">
-          <div class="flex gap-2">
-            <AudioButtons type={1} />
+          <div class="flex gap-4 items-center">
+            <div class="flex gap-2">
+              <AudioButtons type={1} />
+            </div>
+            <div class="text-xl sm:text-2xl flex gap-2">
+              <Pitches type={1} />
+            </div>
           </div>
           <Frequency type={1} />
         </div>
@@ -61,8 +67,13 @@ export function Back() {
 
         <div class="flex flex-col gap-2">
           <div class="flex justify-between">
-            <div class="flex gap-2">
-              <AudioButtons type={2} />
+            <div class="flex gap-4 items-center">
+              <div class="flex gap-2">
+                <AudioButtons type={2} />
+              </div>
+              <div class="text-xl sm:text-2xl flex gap-2">
+                <Pitches type={2} />
+              </div>
             </div>
             <Frequency type={2} />
           </div>

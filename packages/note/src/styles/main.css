@@ -4,16 +4,60 @@
 @import "./kanji-data.css";
 @source "..";
 
-@utility vertical-rl {
-  writing-mode: vertical-rl;
-  text-underline-position: right;
+@layer theme {
+  --color-pitch-heiban: var(--color-info);
+  --color-pitch-atamadaka: var(--color-error);
+  --color-pitch-nakadaka: var(--color-warning);
+  --color-pitch-odaka: var(--color-success);
+  --color-pitch-kifuku: var(--color-accent);
 }
 
-@utility horizontal-tb {
-  writing-mode: horizontal-tb;
+@layer base {
+  [data-theme] {
+    --color-pitch-heiban: var(--color-info);
+    --color-pitch-atamadaka: var(--color-error);
+    --color-pitch-nakadaka: var(--color-warning);
+    --color-pitch-odaka: var(--color-success);
+    --color-pitch-kifuku: var(--color-accent);
+  }
 }
 
 @layer utilities {
+  [data-pitch-type^="heiban"] {
+    --pitch-color: var(--color-pitch-heiban);
+    --pitch-content-color: var(--color-info-content);
+  }
+  [data-pitch-type^="atamadaka"] {
+    --pitch-color: var(--color-pitch-atamadaka);
+    --pitch-content-color: var(--color-error-content);
+  }
+  [data-pitch-type^="nakadaka"] {
+    --pitch-color: var(--color-pitch-nakadaka);
+    --pitch-content-color: var(--color-warning-content);
+  }
+  [data-pitch-type^="odaka"] {
+    --pitch-color: var(--color-pitch-odaka);
+    --pitch-content-color: var(--color-success-content);
+  }
+  [data-pitch-type^="kifuku"] {
+    --pitch-color: var(--color-pitch-kifuku);
+    --pitch-content-color: var(--color-accent-content);
+  }
+
+  .pitch-segment {
+    padding-inline-end: 0.25rem;
+    position: relative;
+  }
+  .pitch-segment::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 8px;
+    background-color: var(--pitch-color);
+  }
+
   .sentence-field {
     b {
       color: var(--pitch-color, var(--color-base-content-primary));
@@ -45,6 +89,15 @@
     vertical-align: middle !important;
     writing-mode: horizontal-tb;
   }
+}
+
+@utility vertical-rl {
+  writing-mode: vertical-rl;
+  text-underline-position: right;
+}
+
+@utility horizontal-tb {
+  writing-mode: horizontal-tb;
 }
 
 :root {

@@ -7,7 +7,7 @@ export function NotePlayIcon(props: { "on:click"?: () => void; color: "primary" 
   return (
     <button on:click={props["on:click"]} on:touchend={(e) => e.stopPropagation()}>
       <PlayIcon
-        class="bg-primary rounded-full text-primary-content p-1 w-6 h-6 cursor-pointer"
+        class="bg-primary rounded-full text-primary-content p-1 size-6 sm:size-8 cursor-pointer"
         classList={{
           "bg-primary text-primary-content": props.color === "primary",
           "bg-secondary text-secondary-content": props.color === "secondary",

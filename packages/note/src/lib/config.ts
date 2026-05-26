@@ -50,6 +50,7 @@ export function updateConfigState(
 export type Dataset = {
   "data-theme": string;
   "data-dictionary": string
+  "data-pitch-type": string;
 };
 
 export type DatasetProp = Partial<Dataset>;
