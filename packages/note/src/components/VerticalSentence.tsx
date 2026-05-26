@@ -162,7 +162,7 @@ export function VerticalSentence() {
           </button>
         </Show>
       </div>
-      <div class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg flex-1">
+      <div class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg">
         <div
           ref={(el) => {
             sentenceRef = el;

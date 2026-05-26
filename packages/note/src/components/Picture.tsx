@@ -44,7 +44,7 @@ export function Picture(props: { type: 1 | 2; currentHtml?: string }) {
   return (
     <Show when={$definitionPictures().length > 0}>
       <div
-        class="max-w-1/3 float-right [&_img]:rounded-sm px-2 cursor-pointer relative group/defpic tappable"
+        class="mb-2 px-0 sm:ms-2 sm:mb-0 sm:max-w-1/3 sm:float-right [&_img]:rounded-sm cursor-pointer relative group/defpic tappable"
         on:click={() => {
           const picture = currentDefPic();
           if (picture) {
