@@ -4,7 +4,7 @@
 @import "./kanji-data.css";
 @source "..";
 
-@layer theme {
+@theme {
   --color-pitch-heiban: var(--color-info);
   --color-pitch-atamadaka: var(--color-error);
   --color-pitch-nakadaka: var(--color-warning);

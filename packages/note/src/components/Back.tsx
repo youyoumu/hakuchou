@@ -30,7 +30,7 @@ export function Back() {
             <div class="flex gap-2">
               <AudioButtons type={1} />
             </div>
-            <div class="text-xl sm:text-2xl flex gap-2">
+            <div class="text-xl sm:text-2xl flex gap-2 flex-wrap">
               <Pitches type={1} />
             </div>
           </div>
@@ -73,7 +73,7 @@ export function Back() {
               <div class="flex gap-2">
                 <AudioButtons type={2} />
               </div>
-              <div class="text-xl sm:text-2xl flex gap-2">
+              <div class="text-xl sm:text-2xl flex gap-2 flex-wrap">
                 <Pitches type={2} />
               </div>
             </div>
