@@ -40,50 +40,53 @@ export function Expression(props: { type: 1 | 2 }) {
   }
 
   return (
-    <div
-      class="flex gap-4 p-4 bg-base-200 rounded-lg relative justify-center"
-      classList={{
-        "ps-8": $card.side === "front",
-        "border-s-4": $cardType() === "taigigo-ruigigo",
-        "border-success": $relationType() === "rui",
-        "border-error": $relationType() === "tai",
-      }}
-    >
-      <RelationIndicator />
+    <div class="flex flex-col">
+      <div class="min-h-lh text-sm mb-1 text-base-content-soft"></div>
       <div
-        class="vertical-rl underline-offset-4 leading-24 tracking-[0.3em] text-7xl py-2 text-nowrap"
+        class="flex gap-4 p-4 bg-base-200 rounded-lg relative justify-center"
         classList={{
-          hidden: $card.side === "back",
-          "text-7xl": !$isLong(),
-          "text-6xl": $isLong(),
-        }}
-        innerHTML={$expression()}
-      ></div>
-
-      <div
-        class="flex flex-col justify-start"
-        classList={{
-          hidden: $card.side === "front",
-          "w-24": !$isLong(),
-          "w-20": $isLong(),
+          "ps-8": $card.side === "front",
+          "border-s-4": $cardType() === "taigigo-ruigigo",
+          "border-success": $relationType() === "rui",
+          "border-error": $relationType() === "tai",
         }}
       >
-        <For each={$svgs()}>
-          {(entry) => {
-            return (
-              <span
-                on:click={handleKanjivgClick}
-                on:mouseenter={(e) => onActive(e, entry.char)}
-                on:mouseleave={onInactive}
-                on:focus={(e) => onActive(e, entry.char)}
-                on:blur={onInactive}
-                on:touchstart={(e) => onActive(e, entry.char)}
-              >
-                {entry.svg}
-              </span>
-            );
+        <RelationIndicator />
+        <div
+          class="vertical-rl underline-offset-4 leading-24 tracking-[0.3em] text-7xl py-2 text-nowrap"
+          classList={{
+            hidden: $card.side === "back",
+            "text-7xl": !$isLong(),
+            "text-6xl": $isLong(),
           }}
-        </For>
+          innerHTML={$expression()}
+        ></div>
+
+        <div
+          class="flex flex-col justify-start"
+          classList={{
+            hidden: $card.side === "front",
+            "w-24": !$isLong(),
+            "w-20": $isLong(),
+          }}
+        >
+          <For each={$svgs()}>
+            {(entry) => {
+              return (
+                <span
+                  on:click={handleKanjivgClick}
+                  on:mouseenter={(e) => onActive(e, entry.char)}
+                  on:mouseleave={onInactive}
+                  on:focus={(e) => onActive(e, entry.char)}
+                  on:blur={onInactive}
+                  on:touchstart={(e) => onActive(e, entry.char)}
+                >
+                  {entry.svg}
+                </span>
+              );
+            }}
+          </For>
+        </div>
       </div>
     </div>
   );

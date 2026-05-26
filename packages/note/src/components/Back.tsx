@@ -39,15 +39,12 @@ export function Back() {
           </div>
         </div>
         <div class="flex flex-row-reverse gap-4">
-          <div class="flex flex-col">
-            <div class="min-h-lh text-sm mb-1 text-base-content-soft"></div>
-            <Show when={$cardType() !== "kakitori"}>
-              <Expression type={1} />
-            </Show>
-            <Show when={$cardType() === "kakitori"}>
-              <VerticalSentence />
-            </Show>
-          </div>
+          <Show when={$cardType() !== "kakitori"}>
+            <Expression type={1} />
+          </Show>
+          <Show when={$cardType() === "kakitori"}>
+            <VerticalSentence />
+          </Show>
           <div class="flex-1">
             <Definition type={1} />
           </div>
@@ -86,7 +83,6 @@ export function Back() {
           </div>
           <div class="flex flex-row-reverse gap-4">
             <div class="flex flex-col">
-              <div class="min-h-lh text-sm mb-1 text-base-content-soft"></div>
               <Expression type={2} />
             </div>
             <div class="flex-1">

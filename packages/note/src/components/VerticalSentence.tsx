@@ -6,7 +6,8 @@ import { useSentences } from "#/hooks/sentence";
 import { constant } from "#/lib/constant";
 import { parseToDoc } from "#/lib/dom";
 import { hiraganaToKatakana } from "#/lib/kana";
-import { createEffect, createMemo, onCleanup } from "solid-js";
+import { createEffect, createMemo, onCleanup, Show } from "solid-js";
+import { ArrowLeftIcon } from "./Icons";
 
 export function VerticalSentence() {
   const { $ankiFields } = useAnkiFieldContext<"front">();
@@ -14,26 +15,29 @@ export function VerticalSentence() {
   const { onInactive, onActive } = useKanjiTooltipContext();
   let sentenceRef: HTMLDivElement | undefined;
 
-  const { $currentPage } = useSentences(() => $ankiFields.Sentence, {
-    initialIndex: (length) => {
-      if ($card.side === "front") {
-        const randomIndex = Math.floor(Math.random() * length);
-        sessionStorage.setItem(constant.key["hakuchou-sentence-index"], randomIndex.toString());
-        return randomIndex;
-      } else {
-        let randomIndex: string | number | null = sessionStorage.getItem(
-          constant.key["hakuchou-sentence-index"],
-        );
-        if (randomIndex) {
-          randomIndex = parseInt(randomIndex);
-        }
-        if (typeof randomIndex === "number" && randomIndex >= 0 && length > randomIndex) {
+  const { $currentPage, $index, $sentences, changePage } = useSentences(
+    () => $ankiFields.Sentence,
+    {
+      initialIndex: (length) => {
+        if ($card.side === "front") {
+          const randomIndex = Math.floor(Math.random() * length);
+          sessionStorage.setItem(constant.key["hakuchou-sentence-index"], randomIndex.toString());
           return randomIndex;
+        } else {
+          let randomIndex: string | number | null = sessionStorage.getItem(
+            constant.key["hakuchou-sentence-index"],
+          );
+          if (randomIndex) {
+            randomIndex = parseInt(randomIndex);
+          }
+          if (typeof randomIndex === "number" && randomIndex >= 0 && length > randomIndex) {
+            return randomIndex;
+          }
+          return Math.floor(Math.random() * length);
         }
-        return Math.floor(Math.random() * length);
-      }
+      },
     },
-  });
+  );
 
   const $kanjiText = createMemo(() => {
     if ($card.side !== "back") return "";
@@ -132,14 +136,41 @@ export function VerticalSentence() {
   });
 
   return (
-    <div class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg flex-1">
-      <div
-        ref={(el) => {
-          sentenceRef = el;
-        }}
-        class="text-6xl vertical-rl underline-offset-4 leading-24 tracking-widest"
-        innerHTML={$sentence()}
-      ></div>
+    <div class="flex flex-col">
+      <div class="min-h-lh text-sm mb-1 text-base-content-soft justify-between flex items-center">
+        <Show when={$sentences().length > 1}>
+          <button
+            class="cursor-pointer"
+            on:click={() => {
+              changePage(-1);
+            }}
+            on:touchend={(e) => e.stopPropagation()}
+          >
+            <ArrowLeftIcon class="size-5"></ArrowLeftIcon>
+          </button>
+          <span>
+            {$index() + 1}/{$sentences().length}
+          </span>
+          <button
+            class="cursor-pointer"
+            on:click={() => {
+              changePage(1);
+            }}
+            on:touchend={(e) => e.stopPropagation()}
+          >
+            <ArrowLeftIcon class="size-5 rotate-180"></ArrowLeftIcon>
+          </button>
+        </Show>
+      </div>
+      <div class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg flex-1">
+        <div
+          ref={(el) => {
+            sentenceRef = el;
+          }}
+          class="text-6xl vertical-rl underline-offset-4 leading-24 tracking-widest"
+          innerHTML={$sentence()}
+        ></div>
+      </div>
     </div>
   );
 }

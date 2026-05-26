@@ -12,7 +12,7 @@ export function Frequency(props: { type: 1 | 2 }) {
   );
 
   return (
-    <div class="flex gap-1 items-center animate-fade-in-sm relative hover:[&_#frequency]:block z-20">
+    <div class="flex gap-1 items-center relative hover:[&_#frequency]:block z-20">
       <div
         class="text-base-content-soft text-sm sm:text-base"
         innerHTML={$freqSort()}
