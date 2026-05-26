@@ -5,11 +5,18 @@ import { useCollectGlossaryImgs } from "#/hooks/glossary";
 import { parseToDoc } from "#/lib/dom";
 
 export function Picture(props: {
+  type: 1 | 2;
   onDefinitionPictureClick?: (picture: string) => void;
   currentHtml?: string;
 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
   const collectGlossaryImgs = useCollectGlossaryImgs();
+  const $picture = createMemo(() =>
+    props.type === 1 ? $ankiFields.Picture : $ankiFields.Picture2,
+  );
+  const $glossary = createMemo(() =>
+    props.type === 1 ? $ankiFields.Glossary : $ankiFields.Glossary2,
+  );
 
   const $definitionPictures = createMemo(() => {
     if (isServer) return [];
@@ -23,13 +30,13 @@ export function Picture(props: {
       }
     }
 
-    const defPicDoc = parseToDoc($ankiFields.Picture);
-    const defPics = Array.from(defPicDoc.querySelectorAll("img")).map((img) => img.outerHTML);
-    const glossaryPics = collectGlossaryImgs($ankiFields.Glossary)
+    const picDoc = parseToDoc($picture());
+    const pics = Array.from(picDoc.querySelectorAll("img")).map((img) => img.outerHTML);
+    const glossaryPics = collectGlossaryImgs($glossary())
       .filter((pic) => !displayedImages.has(pic.src))
       .map((pic) => pic.html);
 
-    return [...defPics, ...glossaryPics];
+    return [...pics, ...glossaryPics];
   });
 
   const [$defPicIndex, $setDefPicIndex] = createSignal(0);
