@@ -4,6 +4,7 @@ import type { DatasetProp } from "#/lib/config";
 import { censorTermsInHtml, isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
 import { extractKanji } from "#/lib/kana";
 import { createMemo, createSignal, For, Show } from "solid-js";
+import { Picture } from "./Picture";
 
 export function Definition(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -112,10 +113,11 @@ export function Definition(props: { type: 1 | 2 }) {
           }}
         >
           <div class="overflow-auto" ref={$setDefinitionRef}>
-            {/* <DefinitionPictureSection */}
-            {/*   onDefinitionPictureClick={props.onDefinitionPictureClick} */}
-            {/*   currentHtml={currentPage()?.html} */}
-            {/* /> */}
+            <Picture
+              // TODO: img modal
+              // onDefinitionPictureClick={props.onDefinitionPictureClick}
+              currentHtml={$currentPage()?.html}
+            />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
           </div>
           {$pages().length > 1 && (
