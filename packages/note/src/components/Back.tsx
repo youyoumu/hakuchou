@@ -10,6 +10,7 @@ import { Frequency } from "./Frequency";
 import { AudioButtons } from "./AudioButtons";
 import Pitches from "./Pitches";
 import { KanKenLevel } from "./KanKenLevel";
+import PictureModal from "./PictureModal";
 
 export function Back() {
   const { $ankiFields } = useAnkiFieldContext<"back">();
@@ -92,6 +93,7 @@ export function Back() {
         </div>
         <Sentence type={2} />
       </Show>
+      <PictureModal />
     </>
   );
 }

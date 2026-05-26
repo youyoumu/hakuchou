@@ -113,12 +113,7 @@ export function Definition(props: { type: 1 | 2 }) {
           }}
         >
           <div class="overflow-auto" ref={$setDefinitionRef}>
-            <Picture
-              type={props.type}
-              // TODO: img modal
-              // onDefinitionPictureClick={props.onDefinitionPictureClick}
-              currentHtml={$currentPage()?.html}
-            />
+            <Picture type={props.type} currentHtml={$currentPage()?.html} />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
           </div>
           {$pages().length > 1 && (

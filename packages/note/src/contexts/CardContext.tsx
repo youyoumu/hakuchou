@@ -7,6 +7,7 @@ type CardStore = {
   side: "front" | "back";
   expressionAudioRef?: HTMLDivElement;
   expressionAudio2Ref?: HTMLDivElement;
+  pictureModalContent: string;
 };
 
 type CardType = "kakitori" | "kotowaza-yojijukugo" | "taigigo-ruigigo";
@@ -28,6 +29,7 @@ export function CardStoreContextProvider(props: { children: JSX.Element; side: "
     side: props.side,
     expressionAudioRef: undefined,
     expressionAudio2Ref: undefined,
+    pictureModalContent: "",
   });
 
   const $cardType = createMemo<CardType>(() => {

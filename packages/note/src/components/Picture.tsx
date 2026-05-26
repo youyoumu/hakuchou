@@ -3,12 +3,10 @@ import { isServer } from "solid-js/web";
 import { useAnkiFieldContext } from "#/contexts/AnkiFieldsContext";
 import { useCollectGlossaryImgs } from "#/hooks/glossary";
 import { parseToDoc } from "#/lib/dom";
+import { useCardContext } from "#/contexts/CardContext";
 
-export function Picture(props: {
-  type: 1 | 2;
-  onDefinitionPictureClick?: (picture: string) => void;
-  currentHtml?: string;
-}) {
+export function Picture(props: { type: 1 | 2; currentHtml?: string }) {
+  const { $setCard } = useCardContext();
   const { $ankiFields } = useAnkiFieldContext<"back">();
   const collectGlossaryImgs = useCollectGlossaryImgs();
   const $picture = createMemo(() =>
@@ -49,7 +47,9 @@ export function Picture(props: {
         class="max-w-1/3 float-right [&_img]:rounded-sm px-2 cursor-pointer relative group/defpic tappable"
         on:click={() => {
           const picture = currentDefPic();
-          if (picture) props.onDefinitionPictureClick?.(picture);
+          if (picture) {
+            $setCard("pictureModalContent", picture);
+          }
         }}
         on:touchend={(e) => e.stopPropagation()}
       >
