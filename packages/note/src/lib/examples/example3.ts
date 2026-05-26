@@ -24,7 +24,7 @@ export const exampleFields: AnkiFields = {
     "PitchCategories2": "",
     "Frequency2": "",
     "FreqSort2": "",
-    "KanKenLevel": "",
+    "KanKenLevel": "1",
     "Kakitori": "x",
     "KotowazaYojijukugo": "",
     "TaigigoRuigigo": "",

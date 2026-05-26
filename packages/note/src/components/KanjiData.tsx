@@ -192,16 +192,16 @@ export function KanjiData(props: KanjiDataProps) {
   function MetadataSection() {
     return (
       <div class="metadata-section">
-        {/* <Show */}
-        {/*   when={k().strokeImage} */}
-        {/*   fallback={ */}
-        {/*     <div class="stroke-image"> */}
-        {/*       <div class="empty-img flex border border-base-content-subtle-100">{k().kanji}</div> */}
-        {/*     </div> */}
-        {/*   } */}
-        {/* > */}
-        {/*   {(strokeImage) => <div class="stroke-image" innerHTML={strokeImage()} />} */}
-        {/* </Show> */}
+        <Show
+          when={k().strokeImage}
+          fallback={
+            <div class="stroke-image block sm:hidden">
+              <div class="empty-img flex border border-base-content-subtle-100">{k().kanji}</div>
+            </div>
+          }
+        >
+          {(strokeImage) => <div class="stroke-image" innerHTML={strokeImage()} />}
+        </Show>
         <div class="flex flex-col gap-2 items-start">
           <ReadingsSection />
           <div class="flex flex-row gap-1 items-start">

@@ -25,7 +25,7 @@ export function Back() {
     <>
       <div class="flex flex-col gap-2">
         <div class="flex justify-between gap-2">
-          <div class="flex gap-4 items-center">
+          <div class="flex gap-2 sm:gap-4 items-center">
             <div class="flex gap-2">
               <AudioButtons type={1} />
             </div>
@@ -38,7 +38,7 @@ export function Back() {
             <Frequency type={1} />
           </div>
         </div>
-        <div class="flex flex-row-reverse gap-4">
+        <div class="flex flex-row-reverse gap-2 sm:gap-4">
           <Show when={$cardType() !== "kakitori"}>
             <Expression type={1} />
           </Show>
@@ -68,7 +68,7 @@ export function Back() {
 
         <div class="flex flex-col gap-2">
           <div class="flex justify-between gap-2">
-            <div class="flex gap-4 items-center">
+            <div class="flex gap-2 sm:gap-4 items-center">
               <div class="flex gap-2">
                 <AudioButtons type={2} />
               </div>
@@ -81,7 +81,7 @@ export function Back() {
               <Frequency type={2} />
             </div>
           </div>
-          <div class="flex flex-row-reverse gap-4">
+          <div class="flex flex-row-reverse gap-2 sm:gap-4">
             <div class="flex flex-col">
               <Expression type={2} />
             </div>

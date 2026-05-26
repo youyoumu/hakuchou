@@ -21,43 +21,37 @@ export function Expression(props: { type: 1 | 2 }) {
     animateKanjivgStrokes(svg);
   }
 
-  function RelationIndicator() {
-    return (
-      <Show
-        when={$card.side === "front" && ($relationType() === "rui" || $relationType() === "tai")}
-      >
-        <div
-          class="absolute top-1/2 -translate-y-1/2 left-4 flex justify-center items-center"
-          classList={{
-            "text-success": $relationType() === "rui",
-            "text-error": $relationType() === "tai",
-          }}
-        >
-          {$relationText()}
-        </div>
-      </Show>
-    );
-  }
-
   return (
     <div class="flex flex-col">
       <div class="min-h-lh text-sm mb-1 text-base-content-soft"></div>
       <div
-        class="flex gap-4 p-4 bg-base-200 rounded-lg relative justify-center"
+        class="flex p-4 bg-base-200 rounded-lg relative justify-center"
         classList={{
-          "ps-8": $card.side === "front",
+          "ps-6 sm:ps-8": $card.side === "front",
           "border-s-4": $cardType() === "taigigo-ruigigo",
           "border-success": $relationType() === "rui",
           "border-error": $relationType() === "tai",
         }}
       >
-        <RelationIndicator />
+        <Show
+          when={$card.side === "front" && ($relationType() === "rui" || $relationType() === "tai")}
+        >
+          <div
+            class="absolute top-1/2 -translate-y-1/2 left-3 sm:left-4 flex justify-center items-center"
+            classList={{
+              "text-success": $relationType() === "rui",
+              "text-error": $relationType() === "tai",
+            }}
+          >
+            {$relationText()}
+          </div>
+        </Show>
         <div
-          class="vertical-rl underline-offset-4 leading-24 tracking-[0.3em] text-7xl py-2 text-nowrap"
+          class="vertical-rl underline-offset-4 tracking-[0.3em] text-nowrap"
           classList={{
             hidden: $card.side === "back",
-            "text-7xl": !$isLong(),
-            "text-6xl": $isLong(),
+            "text-5xl sm:text-7xl leading-16 sm:leading-24": !$isLong(),
+            "text-5xl sm:text-6xl leading-16 sm:leading-20": $isLong(),
           }}
           innerHTML={$expression()}
         ></div>
@@ -66,8 +60,8 @@ export function Expression(props: { type: 1 | 2 }) {
           class="flex flex-col justify-start"
           classList={{
             hidden: $card.side === "front",
-            "w-24": !$isLong(),
-            "w-20": $isLong(),
+            "w-16 sm:w-24": !$isLong(),
+            "w-16 sm:w-20": $isLong(),
           }}
         >
           <For each={$svgs()}>

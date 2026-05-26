@@ -10,7 +10,7 @@ export function KanKenLevel() {
 
   return (
     <Show when={$ankiFields.KanKenLevel}>
-      <div class="badge" {...$dataset()}>
+      <div class="badge badge-sm sm:badge-md" {...$dataset()}>
         {$ankiFields.KanKenLevel.trim()}
       </div>
     </Show>
