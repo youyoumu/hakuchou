@@ -27,9 +27,11 @@ export function Back() {
       <div class="flex flex-col gap-2">
         <div class="flex justify-between gap-2">
           <div class="flex gap-2 sm:gap-4 items-center">
-            <div class="flex gap-2">
-              <AudioButtons type={1} />
-            </div>
+            <Show when={$ankiFields.ExpressionAudio}>
+              <div class="flex gap-2">
+                <AudioButtons type={1} />
+              </div>
+            </Show>
             <div class="text-xl sm:text-2xl flex gap-2 flex-wrap">
               <Pitches type={1} />
             </div>
@@ -70,9 +72,11 @@ export function Back() {
         <div class="flex flex-col gap-2">
           <div class="flex justify-between gap-2">
             <div class="flex gap-2 sm:gap-4 items-center">
-              <div class="flex gap-2">
-                <AudioButtons type={2} />
-              </div>
+              <Show when={$ankiFields.ExpressionAudio2}>
+                <div class="flex gap-2">
+                  <AudioButtons type={2} />
+                </div>
+              </Show>
               <div class="text-xl sm:text-2xl flex gap-2 flex-wrap">
                 <Pitches type={2} />
               </div>
