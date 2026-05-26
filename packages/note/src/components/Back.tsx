@@ -46,7 +46,7 @@ export function Back() {
           <Show when={$cardType() === "kakitori"}>
             <VerticalSentence />
           </Show>
-          <div class="flex-1">
+          <div class="flex-1 min-w-0">
             <Definition type={1} />
           </div>
         </div>
