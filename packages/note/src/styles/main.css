@@ -161,3 +161,31 @@ body {
 .card {
   background-color: var(--color-base-100) !important;
 }
+
+:root {
+  --pitch-red: #f5436d !important; /* atamadaka */
+  --pitch-blue: #39c1ff !important; /* heiban */
+  --pitch-orange: #fca311 !important; /* nakadaka */
+  --pitch-green: #40d4a6 !important; /* odaka */
+  --pitch-purple: #afa2ff !important; /* kifuku */
+}
+
+[data-pitch-type*="atamadaka"] {
+  --pitch-color: var(--pitch-red) !important;
+}
+
+[data-pitch-type*="heiban"] {
+  --pitch-color: var(--pitch-blue) !important;
+}
+
+[data-pitch-type*="nakadaka"] {
+  --pitch-color: var(--pitch-orange) !important;
+}
+
+[data-pitch-type*="odaka"] {
+  --pitch-color: var(--pitch-green) !important;
+}
+
+[data-pitch-type*="kifuku"] {
+  --pitch-color: var(--pitch-purple) !important;
+}
