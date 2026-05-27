@@ -109,15 +109,20 @@ export function Definition(props: { type: 1 | 2 }) {
           }}
         >
           <div class="overflow-auto" ref={$setDefinitionRef}>
-            <span
-              class="cursor-pointer tappable"
-              style={{
-                color: "var(--dictionary-color, var(--color-base-content-calm)",
-              }}
-              on:click={() => $modalRef()?.showModal()}
-              on:touchend={(e) => e.stopPropagation()}
-            >
-              {$currentPage()?.name} ({`${$definitionIndex() + 1}/${$pages().length}`})
+            <span class="inline-flex justify-between w-full">
+              <span
+                class="cursor-pointer tappable"
+                on:click={() => $modalRef()?.showModal()}
+                on:touchend={(e) => e.stopPropagation()}
+                style={{
+                  color: "var(--dictionary-color, var(--color-base-content-calm)",
+                }}
+              >
+                {$currentPage()?.name}
+              </span>{" "}
+              <span class="text-sm text-base-content-soft">
+                ({`${$definitionIndex() + 1}/${$pages().length}`})
+              </span>
             </span>
             <Picture type={props.type} currentHtml={$currentPage()?.html} />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
