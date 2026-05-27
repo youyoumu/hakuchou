@@ -1,5 +1,9 @@
 /* Hakuchou Note __VERSION__ */
 
+[data-hakuchou-version] {
+  display: flex;
+}
+
 :root,
 :host {
   --color-base-100: oklch(25.33% 0.016 252.42);

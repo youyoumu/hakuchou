@@ -160,6 +160,8 @@ export async function initAnki({ side, ssr }: { side: "front" | "back"; ssr?: bo
       );
       if (!mainCss) throw new Error("tailwind not found");
       shadow.appendChild(mainCss.cloneNode(true));
+      const ankiCss = document.querySelector('link[href="/anki.css"]');
+      if (ankiCss) shadow.appendChild(ankiCss.cloneNode(true));
     } else {
       const mainCss = document.createElement("link");
       mainCss.rel = "stylesheet";
