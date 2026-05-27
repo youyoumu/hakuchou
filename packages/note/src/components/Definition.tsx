@@ -4,11 +4,14 @@ import type { DatasetProp } from "#/lib/config";
 import { censorTermsInHtml, isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
 import { extractKanji } from "#/lib/kana";
 import { createMemo, createSignal, For, Show } from "solid-js";
+import { KanjivgText } from "./KanjivgText";
 import { Picture } from "./Picture";
+import { useBreakpointContext } from "#/contexts/BreakpointContext";
 
 export function Definition(props: { type: 1 | 2 }) {
   const { $ankiFields } = useAnkiFieldContext<"back">();
   const { $cardType, $card } = useCardContext();
+  const bp = useBreakpointContext();
   const $variant = createMemo(() => props.type);
   const $shouldCensor = createMemo(
     () => $card.side === "front" && $cardType() === "kotowaza-yojijukugo",
@@ -23,6 +26,7 @@ export function Definition(props: { type: 1 | 2 }) {
     $variant() === 1 ? $ankiFields.Glossary : $ankiFields.Glossary2,
   );
   const $bekkai = createMemo(() => $ankiFields.Bekkai.split("|").map((line) => line.trim()));
+  const $isVerticalBekkai = createMemo(() => $bekkai().length > 3 || !bp.isAtLeast("sm"));
 
   const $pages = createMemo(() => {
     const p: { name: string; html: string }[] = [];
@@ -116,24 +120,25 @@ export function Definition(props: { type: 1 | 2 }) {
             </span>
             <Picture type={props.type} currentHtml={$currentPage()?.html} />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
-            <Show when={$bekkai().length > 0}>
-              <div>{$bekkai()}</div>
+            <Show when={$bekkai().length > 0 && props.type === 1}>
               <div class="collapse collapse-arrow bg-base-100 mt-2">
                 <input type="checkbox" />
                 <div class="collapse-title text-base-content-soft p-2 text-center">別解</div>
                 <div class="collapse-content">
                   <div
-                    class="flex gap-1 flex-wrap"
+                    class="flex gap-1 flex-wrap text-5xl"
                     classList={{
-                      "flex-col": $bekkai().length > 3,
+                      "items-center": !$isVerticalBekkai(),
+                      "items-start": $isVerticalBekkai(),
+                      "flex-col": $isVerticalBekkai(),
                     }}
                   >
                     <For each={$bekkai()}>
                       {(item, i) => (
                         <>
-                          <div>{item}</div>
-                          <Show when={!($bekkai().length > 3) && i() !== $bekkai().length - 1}>
-                            <div>・</div>
+                          <KanjivgText text={item} />
+                          <Show when={!$isVerticalBekkai() && i() !== $bekkai().length - 1}>
+                            <div class="text-2xl text-base-content-soft">・</div>
                           </Show>
                         </>
                       )}
