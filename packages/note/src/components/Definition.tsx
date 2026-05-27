@@ -121,7 +121,7 @@ export function Definition(props: { type: 1 | 2 }) {
             </span>
             <Picture type={props.type} currentHtml={$currentPage()?.html} />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
-            <Show when={$bekkai().length > 0 && props.type === 1}>
+            <Show when={$bekkai().length > 0 && props.type === 2 && $card.side === "back"}>
               <div class="collapse collapse-arrow bg-base-100 mt-2">
                 <input type="checkbox" />
                 <div class="collapse-title text-base-content-soft p-2 text-center">別解</div>
