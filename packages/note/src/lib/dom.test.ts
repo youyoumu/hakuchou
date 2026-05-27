@@ -46,7 +46,8 @@ describe("censorTermsInHtml", () => {
   });
 
   test("skips script, style, and template contents", () => {
-    const html = "<div>keep<script>secret</script><style>hidden</style><template>nope</template></div>";
+    const html =
+      "<div>keep<script>secret</script><style>hidden</style><template>nope</template></div>";
 
     expect(censorTermsInHtml(html, ["secret", "hidden", "nope"])).toBe(html);
   });
@@ -66,7 +67,7 @@ describe("censorTermsInHtml", () => {
     const term = "可愛い子には旅をさせよ";
 
     expect(censorTermsInHtml(html, [term, ...extractKanji(term)])).toBe(
-      "<p><span data-censor-term-group=\"\"><span data-censor-term-char=\"\">可</span><span data-censor-term-char=\"\">愛</span><span data-censor-term-char=\"\">い</span><span data-censor-term-char=\"\">子</span><span data-censor-term-char=\"\">に</span><span data-censor-term-char=\"\">は</span><span data-censor-term-char=\"\">旅</span><span data-censor-term-char=\"\">を</span><span data-censor-term-char=\"\">さ</span><span data-censor-term-char=\"\">せ</span><span data-censor-term-char=\"\">よ</span></span>という言葉のように、早くから、<span data-censor-term-group=\"\"><span data-censor-term-char=\"\">子</span></span>供のやることには口を出さず自分で決めてもらっている。</p>",
+      '<p><span data-censor-term-group=""><span data-censor-term-char="">可</span><span data-censor-term-char="">愛</span><span data-censor-term-char="">い</span><span data-censor-term-char="">子</span><span data-censor-term-char="">に</span><span data-censor-term-char="">は</span><span data-censor-term-char="">旅</span><span data-censor-term-char="">を</span><span data-censor-term-char="">さ</span><span data-censor-term-char="">せ</span><span data-censor-term-char="">よ</span></span>という言葉のように、早くから、<span data-censor-term-group=""><span data-censor-term-char="">子</span></span>供のやることには口を出さず自分で決めてもらっている。</p>',
     );
   });
 });

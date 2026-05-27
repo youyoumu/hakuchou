@@ -151,9 +151,7 @@ export function useKanjivg(kanji: Accessor<string>) {
         return promise;
       };
 
-      const svgs = await Promise.all(
-        unicodePoints.map((entry) => loadCached(entry.unicode)),
-      );
+      const svgs = await Promise.all(unicodePoints.map((entry) => loadCached(entry.unicode)));
       if (controller.signal.aborted) return;
 
       $setSvgs(

@@ -3,6 +3,7 @@ import { useCardContext } from "#/contexts/CardContext";
 import type { DatasetProp } from "#/lib/config";
 import { censorTermsInHtml, isHtmlEffectivelyEmpty, parseToDoc } from "#/lib/dom";
 import { extractKanji } from "#/lib/kana";
+import { splitDelimitedField } from "#/lib/split";
 import { createMemo, createSignal, For, Show } from "solid-js";
 import { KanjivgText } from "./KanjivgText";
 import { Picture } from "./Picture";
@@ -25,9 +26,7 @@ export function Definition(props: { type: 1 | 2 }) {
   const $glossary = createMemo(() =>
     $variant() === 1 ? $ankiFields.Glossary : $ankiFields.Glossary2,
   );
-  const $bekkai = createMemo(() =>
-    $ankiFields.Bekkai ? $ankiFields.Bekkai.split("|").map((line) => line.trim()) : [],
-  );
+  const $bekkai = createMemo(() => splitDelimitedField($ankiFields.Bekkai));
   const $isVerticalBekkai = createMemo(() => $bekkai().length > 3 || !bp.isAtLeast("sm"));
 
   const $pages = createMemo(() => {
