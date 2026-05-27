@@ -137,8 +137,8 @@ export function VerticalSentence() {
 
   return (
     <div class="flex flex-col">
-      <div class="min-h-lh text-sm mb-1 text-base-content-soft justify-between flex items-center">
-        <Show when={$sentences().length > 1}>
+      <Show when={$sentences().length > 1}>
+        <div class="min-h-lh text-sm mb-1 text-base-content-soft justify-between flex items-center">
           <button
             class="cursor-pointer"
             on:click={() => {
@@ -160,8 +160,8 @@ export function VerticalSentence() {
           >
             <ArrowLeftIcon class="size-5 rotate-180"></ArrowLeftIcon>
           </button>
-        </Show>
-      </div>
+        </div>
+      </Show>
       <div class="flex flex-col justify-start items-end max-h-[80vh] bg-base-200 p-4 rounded-lg">
         <div
           ref={(el) => {

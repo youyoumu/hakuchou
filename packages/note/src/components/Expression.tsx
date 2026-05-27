@@ -23,7 +23,6 @@ export function Expression(props: { type: 1 | 2 }) {
 
   return (
     <div class="flex flex-col">
-      <div class="min-h-lh text-sm mb-1 text-base-content-soft"></div>
       <div
         class="flex p-4 bg-base-200 rounded-lg relative justify-center"
         classList={{
