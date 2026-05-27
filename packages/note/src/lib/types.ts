@@ -24,6 +24,7 @@ export type AnkiFields = {
   FreqSort2: string;
 
   KanKenLevel: string;
+  Bekkai: string;
   Kakitori: string;
   KotowazaYojijukugo: string;
   TaigigoRuigigo: string;
@@ -37,6 +38,8 @@ const frontKeys = [
   "ExpressionAudio",
   "Sentence",
 
+  "KanKenLevel",
+  "Bekkai",
   "Kakitori",
   "KotowazaYojijukugo",
   "TaigigoRuigigo",
@@ -78,6 +81,7 @@ export const ankiFieldsSkeleton: AnkiFields = {
   FreqSort2: "",
 
   KanKenLevel: "",
+  Bekkai: "",
   Kakitori: "",
   KotowazaYojijukugo: "",
   TaigigoRuigigo: "",
