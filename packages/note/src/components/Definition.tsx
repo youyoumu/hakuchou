@@ -25,7 +25,9 @@ export function Definition(props: { type: 1 | 2 }) {
   const $glossary = createMemo(() =>
     $variant() === 1 ? $ankiFields.Glossary : $ankiFields.Glossary2,
   );
-  const $bekkai = createMemo(() => $ankiFields.Bekkai.split("|").map((line) => line.trim()));
+  const $bekkai = createMemo(() =>
+    $ankiFields.Bekkai ? $ankiFields.Bekkai.split("|").map((line) => line.trim()) : [],
+  );
   const $isVerticalBekkai = createMemo(() => $bekkai().length > 3 || !bp.isAtLeast("sm"));
 
   const $pages = createMemo(() => {
