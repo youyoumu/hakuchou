@@ -1,5 +1,4 @@
 import { createMemo, createSignal, type Accessor } from "solid-js";
-import { splitDelimitedField } from "#/lib/split";
 
 export function useSentences(
   $html: Accessor<string>,
@@ -10,7 +9,7 @@ export function useSentences(
   const $sentences = createMemo(() => {
     const html = $html();
     if (!html) return [];
-    return splitDelimitedField(html).map((s, i) => ({ page: i + 1, html: s }));
+    return html.split(/[\|｜]/).map((s, i) => ({ page: i + 1, html: s }));
   });
 
   const [$index, $setIndex] = createSignal(
