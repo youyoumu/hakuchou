@@ -1,5 +1,10 @@
 /* Hakuchou Note __VERSION__ */
 
+:root,
+:host {
+  --color-base-100: oklch(25.33% 0.016 252.42);
+}
+
 :root {
   font-size: 16px;
   scrollbar-gutter: stable;
