@@ -2,7 +2,7 @@ import { usePitch } from "#/hooks/pitch";
 import type { DatasetProp } from "#/lib/config";
 import type { PitchInfo } from "#/lib/hatsuon";
 import type { PitchType } from "#/lib/types";
-import { createMemo, For } from "solid-js";
+import { createMemo, For, Show } from "solid-js";
 
 export default function Pitches(props: { type: 1 | 2 }) {
   const { $pitchInfos } = usePitch({ type: props.type });
@@ -38,27 +38,30 @@ export function Pitch(props: { pitchInfo: PitchInfo; index: number }) {
   return (
     <div class="tooltip" data-tip={$pitchTypeJA()} {...$pitchDataset()}>
       <div class="flex items-start gap-1">
-        <div>
-          <For each={props.pitchInfo.morae}>
-            {(mora, i) => {
-              return (
-                <span
-                  style={{
-                    "border-color": "var(--pitch-color)",
-                    color: "var(--pitch-color)",
-                  }}
-                  classList={{
-                    "border-t-2": props.pitchInfo.pattern[i()] === 1,
-                    "pitch-segment":
-                      props.pitchInfo.pattern[i()] === 1 && props.pitchInfo.pattern[i() + 1] === 0,
-                  }}
-                >
-                  {mora}
-                </span>
-              );
-            }}
-          </For>
-        </div>
+        <Show when={props.index === 0}>
+          <div>
+            <For each={props.pitchInfo.morae}>
+              {(mora, i) => {
+                return (
+                  <span
+                    style={{
+                      "border-color": "var(--pitch-color)",
+                      color: "var(--pitch-color)",
+                    }}
+                    classList={{
+                      "border-t-2": props.pitchInfo.pattern[i()] === 1,
+                      "pitch-segment":
+                        props.pitchInfo.pattern[i()] === 1 &&
+                        props.pitchInfo.pattern[i() + 1] === 0,
+                    }}
+                  >
+                    {mora}
+                  </span>
+                );
+              }}
+            </For>
+          </div>
+        </Show>
         <div
           class="text-sm px-0.5 rounded-sm leading-tight"
           style={{
