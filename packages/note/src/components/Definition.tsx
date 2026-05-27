@@ -48,6 +48,12 @@ export function Definition(props: { type: 1 | 2 }) {
         const dictGroups = new Map<string, string>();
         for (const li of entries) {
           const dictName = li.getAttribute("data-dictionary") || "Glossary";
+
+          const iTag = li.querySelector("i");
+          if (iTag && iTag.innerText.includes(dictName)) {
+            iTag.style.display = "none";
+          }
+
           const prevHtml = dictGroups.get(dictName);
           const divider = prevHtml ? '<div class="divider"></div>' : "";
           dictGroups.set(dictName, (prevHtml || "") + divider + li.outerHTML);
@@ -90,22 +96,6 @@ export function Definition(props: { type: 1 | 2 }) {
   return (
     <Show when={$pages().length > 0}>
       <div class="flex flex-col h-full" {...$definitionDataset()}>
-        <Show when={$pages().length > 1}>
-          <div
-            class="flex justify-between text-base-content-calm text-sm cursor-pointer hover:text-base-content transition-colors mb-1 tappable"
-            on:click={() => $modalRef()?.showModal()}
-            on:touchend={(e) => e.stopPropagation()}
-          >
-            <div
-              style={{
-                color: "var(--dictionary-color, var(--color-base-content-calm)",
-              }}
-            >
-              {$currentPage()?.name}
-            </div>
-            <div class="text-base-content-soft">{`${$definitionIndex() + 1}/${$pages().length}`}</div>
-          </div>
-        </Show>
         <div
           class="relative bg-base-200 p-4 border-s-4 text-base sm:text-xl rounded-lg definition-field"
           style={{
@@ -113,6 +103,16 @@ export function Definition(props: { type: 1 | 2 }) {
           }}
         >
           <div class="overflow-auto" ref={$setDefinitionRef}>
+            <span
+              class="cursor-pointer tappable"
+              style={{
+                color: "var(--dictionary-color, var(--color-base-content-calm)",
+              }}
+              on:click={() => $modalRef()?.showModal()}
+              on:touchend={(e) => e.stopPropagation()}
+            >
+              {$currentPage()?.name} ({`${$definitionIndex() + 1}/${$pages().length}`})
+            </span>
             <Picture type={props.type} currentHtml={$currentPage()?.html} />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
           </div>
