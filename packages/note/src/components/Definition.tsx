@@ -22,6 +22,7 @@ export function Definition(props: { type: 1 | 2 }) {
   const $glossary = createMemo(() =>
     $variant() === 1 ? $ankiFields.Glossary : $ankiFields.Glossary2,
   );
+  const $bekkai = createMemo(() => $ankiFields.Bekkai.split("|").map((line) => line.trim()));
 
   const $pages = createMemo(() => {
     const p: { name: string; html: string }[] = [];
@@ -115,6 +116,32 @@ export function Definition(props: { type: 1 | 2 }) {
             </span>
             <Picture type={props.type} currentHtml={$currentPage()?.html} />
             <div class="contents" innerHTML={$currentPage()?.html}></div>
+            <Show when={$bekkai().length > 0}>
+              <div>{$bekkai()}</div>
+              <div class="collapse collapse-arrow bg-base-100 mt-2">
+                <input type="checkbox" />
+                <div class="collapse-title text-base-content-soft p-2 text-center">別解</div>
+                <div class="collapse-content">
+                  <div
+                    class="flex gap-1 flex-wrap"
+                    classList={{
+                      "flex-col": $bekkai().length > 3,
+                    }}
+                  >
+                    <For each={$bekkai()}>
+                      {(item, i) => (
+                        <>
+                          <div>{item}</div>
+                          <Show when={!($bekkai().length > 3) && i() !== $bekkai().length - 1}>
+                            <div>・</div>
+                          </Show>
+                        </>
+                      )}
+                    </For>
+                  </div>
+                </div>
+              </div>
+            </Show>
           </div>
           {$pages().length > 1 && (
             <div class="absolute inset-y-0 left-0 right-0 flex justify-between pointer-events-none">

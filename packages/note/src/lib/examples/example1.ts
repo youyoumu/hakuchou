@@ -25,7 +25,7 @@ export const exampleFields: AnkiFields = {
   "Frequency2": "<ul style=\"text-align: left;\"><li>Jiten: 22561</li><li>Jiten: 147873㋕</li><li>JPDBv2㋕: 25224</li></ul>",
   "FreqSort2": "23818",
   "KanKenLevel": "",
-  "Bekkai": "",
+  "Bekkai": "別解|特別",
   "Kakitori": "",
   "KotowazaYojijukugo": "",
   "TaigigoRuigigo": "対",
