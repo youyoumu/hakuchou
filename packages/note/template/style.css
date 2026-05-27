@@ -1,7 +1,21 @@
 /* Hakuchou Note __VERSION__ */
 
 [data-hakuchou-version] {
-  display: flex;
+  /* display: none; */
+}
+
+[data-hakuchou-header] {
+  /* display: none; */
+}
+
+[data-hakuchou-layout] > div {
+  /* padding-top: 0.5rem; */
+}
+
+@media (min-width: 640px) {
+  [data-hakuchou-layout] > div {
+    /* padding-top: 1rem; */
+  }
 }
 
 :root,

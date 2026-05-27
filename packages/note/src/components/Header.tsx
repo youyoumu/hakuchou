@@ -6,6 +6,7 @@ export function Header() {
 
   return (
     <div
+      data-hakuchou-header
       class="top-0 left-0 w-full pt-2 pb-2 sm:pt-4 bg-base-100/90 backdrop-blur-xs z-30"
       classList={{
         fixed: !$general.isAnkiWeb,
