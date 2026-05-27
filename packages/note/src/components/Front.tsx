@@ -18,7 +18,7 @@ export function Front() {
 
   return (
     <>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 mt-1">
         <div class="flex justify-end text-xl sm:text-2xl min-h-lh"></div>
         <Show when={$cardType() === "kakitori"}>
           <div class="flex flex-col items-end">

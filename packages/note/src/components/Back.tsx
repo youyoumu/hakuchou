@@ -24,7 +24,7 @@ export function Back() {
 
   return (
     <>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 mt-1">
         <div class="flex justify-between gap-2">
           <div class="flex gap-2 sm:gap-4 items-center">
             <div class="text-xl sm:text-2xl flex gap-2 flex-wrap">
